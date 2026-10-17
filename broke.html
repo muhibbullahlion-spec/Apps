@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a2332">
+<title>পাপ থেকে বিরত থাকার উপায়</title>
+<style>
+/* ===================== RESET ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a2332;
+  color: #e8edf3;
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* ===================== HEADER ===================== */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 16px 20px;
+  background: #1a2332;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.back-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #e8edf3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.back-btn:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===================== CONTAINER ===================== */
+.container {
+  padding: 0 16px 40px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ===================== INTRO ===================== */
+.intro {
+  padding: 4px 4px 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.intro-text {
+  font-size: 15.5px;
+  color: #cbd5e1;
+  line-height: 1.85;
+  text-align: justify;
+}
+
+.intro-text strong {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+/* ===================== SECTION ===================== */
+.section {
+  margin-bottom: 24px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* ===================== COPY BUTTON ===================== */
+.copy-btn {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #a5b4fc;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.copy-btn:active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.copy-btn.copied {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+/* ===================== CARD ===================== */
+.card {
+  background: #212d3f;
+  border-radius: 12px;
+  padding: 18px 20px;
+  border-left: 3px solid #4ade80;
+}
+
+.card p {
+  font-size: 15px;
+  color: #d1d9e6;
+  line-height: 1.9;
+  margin-bottom: 12px;
+  text-align: justify;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+.card strong {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+/* ===================== LINK BOX ===================== */
+.link-box {
+  background: rgba(79, 70, 229, 0.1);
+  border: 1px solid rgba(79, 70, 229, 0.3);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin: 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.link-icon {
+  font-size: 26px;
+  flex-shrink: 0;
+}
+
+.link-content {
+  flex: 1;
+}
+
+.link-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #a5b4fc;
+  margin-bottom: 4px;
+}
+
+.link-desc {
+  font-size: 13.5px;
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+/* ===================== TIMELINE ===================== */
+.timeline {
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, 
+    rgba(74, 222, 128, 0.5), 
+    rgba(74, 222, 128, 0.2),
+    rgba(74, 222, 128, 0.05));
+}
+
+.day-card {
+  position: relative;
+  background: #212d3f;
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+
+.day-card::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 22px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #4ade80;
+  border: 2px solid #1a2332;
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.15);
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.day-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #4ade80;
+  letter-spacing: 0.5px;
+}
+
+.day-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  flex: 1;
+}
+
+.day-text {
+  font-size: 14.5px;
+  color: #cbd5e1;
+  line-height: 1.85;
+  text-align: justify;
+}
+
+.day-text strong {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+.day-text em {
+  color: #7dd3fc;
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* ===================== TRIGGER CONNECT ===================== */
+.trigger-box {
+  background: linear-gradient(135deg, #2a1f3d 0%, #1e2a3a 100%);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin: 14px 0;
+  text-align: center;
+}
+
+.trigger-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.trigger-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fbbf24;
+  margin-bottom: 10px;
+}
+
+.trigger-text {
+  font-size: 14.5px;
+  color: #cbd5e1;
+  line-height: 1.85;
+  text-align: center;
+}
+
+.trigger-text strong {
+  color: #4ade80;
+  font-weight: 600;
+}
+
+/* ===================== STEP LIST ===================== */
+.step {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.step:last-child {
+  border-bottom: none;
+}
+
+.step-number {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(74, 222, 128, 0.12);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  color: #4ade80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.step-desc {
+  font-size: 14.5px;
+  color: #94a3b8;
+  line-height: 1.75;
+}
+
+/* ===================== QUOTE ===================== */
+.quote {
+  padding: 10px 0 10px 14px;
+  border-left: 2px solid #fbbf24;
+  margin: 14px 0;
+  font-size: 15px;
+  color: #fef3c7;
+  font-style: italic;
+  line-height: 1.85;
+}
+
+.quote-source {
+  display: block;
+  text-align: right;
+  font-size: 13px;
+  color: #94a3b8;
+  font-style: normal;
+  margin-top: 6px;
+}
+
+/* ===================== TOAST ===================== */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #16a34a;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.3);
+  z-index: 2000;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===================== FOOTER ===================== */
+.footer-note {
+  text-align: center;
+  margin-top: 30px;
+  padding: 20px;
+  color: #64748b;
+  font-size: 13.5px;
+  line-height: 1.8;
+}
+
+.footer-note .heart {
+  color: #4ade80;
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="page-header">
+  <button class="back-btn" onclick="history.back()">🔙</button>
+  <h1 class="page-title">পাপ থেকে বিরত থাকার উপায়</h1>
+</header>
+
+<div class="container">
+
+  <!-- ===================== INTRO ===================== -->
+  <div class="intro">
+    <p class="intro-text">
+      পাপ থেকে বিরত থাকা একদিনে হয় না। এটি একটি <strong>দীর্ঘ যাত্রা</strong> — যেখানে ধৈর্য, ইবাদত ও আল্লাহর সাহায্য দরকার। এই পেজে <strong>৯০ দিনের পূর্ণ রোডম্যাপ</strong> দেওয়া হলো, যা ধাপে ধাপে আপনাকে মুক্তির পথে নিয়ে যাবে ইনশাআল্লাহ।
+    </p>
+  </div>
+
+  <!-- ===================== অ্যাপ ট্রিগার সংযোগ ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🔗 অ্যাপের সাথে সংযোগ</div>
+    </div>
+
+    <div class="trigger-box">
+      <div class="trigger-icon">⏱️</div>
+      <div class="trigger-title">আপনার অ্যাপই আপনার সঙ্গী</div>
+      <p class="trigger-text">
+        হোমপেজে <strong>"শুরু করুন"</strong> বাটন আছে — এটা চাপলেই আপনার রোডম্যাপ শুরু। যতক্ষণ পাপ থেকে বিরত থাকবেন, ততক্ষণ টাইমার চলবে। <strong>প্রতিটি দিন, প্রতি সপ্তাহ, প্রতি মাস</strong> অ্যাপে আপনার অগ্রগতি দেখতে পাবেন।
+      </p>
+    </div>
+
+    <div class="link-box">
+      <div class="link-icon">🔔</div>
+      <div class="link-content">
+        <div class="link-title">ট্রিগার নোটিফিকেশন</div>
+        <div class="link-desc">নিচে দেওয়া প্রতিটি ধাপ পার হলে অ্যাপ <strong>স্বয়ংক্রিয়ভাবে অভিনন্দন</strong> জানাবে — ১ দিন, ৩ দিন, ৭ দিন, ৩০ দিন, ৯০ দিন...</div>
+      </div>
+    </div>
+
+    <div class="link-box">
+      <div class="link-icon">📝</div>
+      <div class="link-content">
+        <div class="link-title">রিপোর্ট সিস্টেম</div>
+        <div class="link-desc">যদি কোনো সময় পড়ে যান — অ্যাপে বন্ধ করুন, নোট লিখুন কেন পড়লেন। <strong>"আমার রিপোর্ট"</strong> এ সব সেভ থাকবে।</div>
+      </div>
+    </div>
+
+    <div class="link-box">
+      <div class="link-icon">📜</div>
+      <div class="link-content">
+        <div class="link-title">History</div>
+        <div class="link-desc">প্রতিটি চেষ্টার হিসাব History এ থাকবে — কত দিন টিকেছিলেন, কতবার পড়েছিলেন। <strong>নিজের অগ্রগতি নিজে দেখুন।</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== প্রথম ৭ দিন ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🪜 প্রথম সপ্তাহ (১-৭ দিন)</div>
+      <button class="copy-btn" onclick="copyContent(this, 'week1')">কপি</button>
+    </div>
+
+    <div class="timeline" id="week1">
+
+      <div class="day-card">
+        <div class="day-header">
+          <span class="day-label">দিন ১</span>
+          <span class="day-title">শুরু ও সংকল্প</span>
+        </div>
+        <p class="day-text">
+          আজ থেকে পাপ সম্পূর্ণ বন্ধের <strong>শপথ</strong> নিন। অ্যাপে <em>"শুরু করুন"</em> চাপুন। সব পর্ন সাইট, ভিডিও, ছবি — ডিলিট করুন। ঘরে যা মনে করায় — সেটা সরান। আজকের রাতেই আল্লাহর কাছে তাওবা করুন।
+        </p>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <span class="day-label">দিন ২-৩</span>
+          <span class="day-title">কঠিন সময়</span>
+        </div>
+        <p class="day-text">
+          এ সময়ে মন খুব অস্থির থাকবে। <strong>বারবার ইচ্ছা আসবে</strong>। কিন্তু এটাই শয়তানের প্রথম পরীক্ষা। ঠান্ডা পানি দিয়ে অজু করুন। ৫ মিনিট হাঁটুন। ফোন দূরে রাখুন। <em>আল্লাহর উপর ভরসা রাখুন।</em>
+        </p>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <span class="day-label">দিন ৪-৫</span>
+          <span class="day-title">শরীরের পরিবর্তন</span>
+        </div>
+        <p class="day-text">
+          শরীরে হালকা শক্তি অনুভব করবেন। <strong>নামাজে মনোযোগ বাড়বে</strong>। সকালে ঘুম থেকে সহজে উঠবেন। এটাই ইতিবাচক সংকেত।
+        </p>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <span class="day-label">দিন ৬-৭</span>
+          <span class="day-title">প্রথম সপ্তাহ পূর্ণ</span>
+        </div>
+        <p class="day-text">
+          প্রথম সপ্তাহ পার! 🎊 অ্যাপ <strong>"এক সপ্তাহ"</strong> অভিনন্দন দেখাবে। মুখে হালকা নূর অনুভব করবেন। বন্ধুদের সাথে কথা বলতে আত্মবিশ্বাস বাড়বে।
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== ২-৪ সপ্তাহ ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🪜 প্রথম মাস (৮-৩০ দিন)</div>
+      <button class="copy-btn" onclick="copyContent(this, 'month1')">কপি</button>
+    </div>
+
+    <div class="timeline" id="month1">
+
+      <div class="day-card">
+        <div class="day-header">
+          <span class="day-label">দিন ৮-১৪</span>
+          <span class="day-title">দ্বিতীয় সপ্তাহ</span>
+        </div>
+        <p class="day-text">
+          শরীর আরো শক্তিশালী হবে। মনের <strong>অস্থিরতা কমতে থাকবে</strong>। রাতে ভালো ঘুম হবে। পড়াশোনায় মনোযোগ বাড়বে। সম্ভব হলে <em>সপ্তাহে ২ দিন রোজা</em> শুরু করুন।
+        </p>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <span class="day-label">দিন ১৫-২১</span>
+          <span class="day-title">তৃতীয় সপ্তাহ</span>
+        </div>
+        <p class="day-text">
+          <strong>চেহারায় পরিবর্তন</strong> দেখতে পাবেন — চোখ উজ্জ্বল, মুখে নূর। আত্মবিশ্বাস বাড়বে। অ্যাপ <strong>"২১ দিন"</strong> অভিনন্দন দেখাবে। অভ্যাস গড়ার পথে আপনি।
+        </p>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <span class="day-label">দিন ২২-৩০</span>
+          <span class="day-title">এক মাস পূর্ণ</span>
+        </div>
+        <p class="day-text">
+          🎊 <strong>এক মাস!</strong> এটাই বড় মাইলস্টোন। শরীর পুরোপুরি শক্তি ফিরে পাবে। মস্তিষ্ক সচল হবে। ত্বক পরিষ্কার হবে। <em>অ্যাপে "এক মাস" অভিনন্দন আসবে।</em>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== ২-৩ মাস ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🪜 দ্বিতীয় মাস (৩১-৬০ দিন)</div>
+      <button class="copy-btn" onclick="copyContent(this, 'month2')">কপি</button>
+    </div>
+
+    <div class="timeline" id="month2">
+
+      <div class="day-card">
+        <div class="day-header">
+          <span class="day-label">দিন ৩১-৪৫</span>
+          <span class="day-title">গভীর পরিবর্তন</span>
+        </div>
+        <p class="day-text">
+          আপনার <strong>চিন্তা ও দৃষ্টিভঙ্গি বদলাবে</strong>। পাপের প্রতি ঘৃণা জন্মাবে। হালাল কাজে আনন্দ পাবেন। বন্ধু ও পরিবারের সাথে সম্পর্ক ভালো হবে। <em>অ্যাপ "৪৫ দিন" দেখাবে।</em>
+        </p>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <span class="day-label">দিন ৪৬-৬০</span>
+          <span class="day-title">দুই মাস পূর্ণ</span>
+        </div>
+        <p class="day-text">
+          🎊 <strong>দুই মাস!</strong> শরীরের হরমোন ভারসাম্যে ফিরে আসবে। স্মৃতিশক্তি বাড়বে। মুখে নূর স্পষ্ট দেখা যাবে। কাজে-কর্মে সফলতা আসবে। <em>ঈমান শক্তিশালী হবে।</em>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== ৩ মাস ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🪜 তৃতীয় মাস (৬১-৯০ দিন)</div>
+      <button class="copy-btn" onclick="copyContent(this, 'month3')">কপি</button>
+    </div>
+
+    <div class="timeline" id="month3">
+
+      <div class="day-card">
+        <div class="day-header">
+          <span class="day-label">দিন ৬১-৭৫</span>
+          <span class="day-title">আত্মিক শক্তি</span>
+        </div>
+        <p class="day-text">
+          দ্বীনি জ্ঞানের প্রতি আগ্রহ বাড়বে। <strong>ইবাদতে স্বাদ</strong> পাবেন। কুরআন পড়তে ভালো লাগবে। মানুষের সাথে ব্যবহার উন্নত হবে। <em>অ্যাপ "৭৫ দিন" দেখাবে।</em>
+        </p>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <span class="day-label">দিন ৭৬-৯০</span>
+          <span class="day-title">তিন মাস পূর্ণ</span>
+        </div>
+        <p class="day-text">
+          🎊 <strong>৯০ দিন!</strong> এটাই সবচেয়ে বড় পরিবর্তন। শারীরিক, মানসিক, আধ্যাত্মিক — সবদিকে নতুন মানুষ হয়ে উঠবেন ইনশাআল্লাহ। এখন বিয়ে করার চিন্তা করুন (সামর্থ্য থাকলে)। <em>টাইমার দেখাবে ৯০ দিন!</em>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== ৯০ দিনের পর ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🌟 ৯০ দিনের পর</div>
+      <button class="copy-btn" onclick="copyContent(this, 'after90')">কপি</button>
+    </div>
+
+    <div class="card" id="after90">
+      <p>
+        <strong>৯০ দিন পর আপনার অবস্থা:</strong>
+      </p>
+      <ul style="list-style: none; padding: 0; margin-top: 10px;">
+        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">✅ শরীর সুস্থ, শক্তিশালী</li>
+        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">✅ চেহারায় নূর, চোখে প্রশান্তি</li>
+        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">✅ মুখস্থ শক্তি ও মনোযোগ বেড়ে যাওয়া</li>
+        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">✅ নামাজে মনোযোগ, ইবাদতে স্বাদ</li>
+        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">✅ পাপের প্রতি ঘৃণা জন্মানো</li>
+        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">✅ পরিবার-সমাজে সম্মান বেড়ে যাওয়া</li>
+        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">✅ কুরআন-সুন্নাহ অনুযায়ী জীবন</li>
+        <li style="padding: 8px 0;">✅ আল্লাহর সাথে সম্পর্ক মজবুত</li>
+      </ul>
+
+      <p style="margin-top: 14px;">
+        <strong>৯০ দিন মানে ৩ মাস।</strong> এটাই অভ্যাস পরিবর্তনের বৈজ্ঞানিক সময়। এখান থেকে পরবর্তী যাত্রা সহজ হবে ইনশাআল্লাহ।
+      </p>
+
+      <div class="quote">
+        রাসূল (সা.) বলেছেন: <strong>"নিশ্চয়ই আল্লাহর কাছে সবচেয়ে প্রিয় কাজ হলো যা নিয়মিত করা হয়, যদিও তা অল্প হয়।"</strong>
+        <span class="quote-source">— (সহীহ বুখারী, ৬৪৬৪)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== পড়ে গেলে ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">💔 যদি পড়ে যান</div>
+      <button class="copy-btn" onclick="copyContent(this, 'fall')">কপি</button>
+    </div>
+
+    <div class="card" id="fall">
+      <p>
+        পথে পড়ে যাওয়া মানে <strong>হেরে যাওয়া নয়</strong>। শয়তান চায় আপনি হাল ছাড়ুন। কিন্তু আপনি উঠবেন।
+      </p>
+
+      <div class="quote">
+        রাসূল (সা.) বলেছেন: <strong>"প্রত্যেক আদম সন্তানই ভুল করে। আর উত্তম ভুলকারী হলো সে, যে তাওবা করে।"</strong>
+        <span class="quote-source">— (সুনানে তিরমিযী, ২৪৯৯)</span>
+      </div>
+
+      <p>
+        <strong>পড়ে গেলে করণীয়:</strong>
+      </p>
+      <ul style="list-style: none; padding: 0; margin-top: 10px;">
+        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">১. সাথে সাথে তাওবা করুন</li>
+        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">২. অ্যাপে বন্ধ করুন, নোট লিখুন</li>
+        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">৩. নিজেকে দোষারোপ করবেন না — হাল ছাড়বেন না</li>
+        <li style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">৪. গোসল করে অজু করে নামাজ পড়ুন</li>
+        <li style="padding: 8px 0;">৫. আবার নতুন করে শুরু করুন — ০ থেকে</li>
+      </ul>
+
+      <p style="margin-top: 12px;">
+        <strong>মনে রাখুন:</strong> ১০০ বার পড়ে গেলেও ১০১ বার উঠুন। আল্লাহ আপনার প্রতিটি চেষ্টা দেখছেন।
+      </p>
+    </div>
+  </div>
+
+  <!-- ===================== দোয়া ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🤲 প্রতিদিনের দোয়া</div>
+      <button class="copy-btn" onclick="copyContent(this, 'dua')">কপি</button>
+    </div>
+
+    <div class="card" id="dua" style="border-left-color: #fbbf24;">
+      <div class="quote">
+        <strong>اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي</strong><br>
+        "হে আল্লাহ! আমি আপনার কাছে আমার নফসের অনিষ্ট থেকে আশ্রয় চাই।"
+        <span class="quote-source">— (সুনানে তিরমিযী)</span>
+      </div>
+
+      <div class="quote" style="margin-top: 12px;">
+        <strong>اللَّهُمَّ طَهِّرْ قَلْبِي وَحَصِّنْ فَرْجِي</strong><br>
+        "হে আল্লাহ! আমার হৃদয়কে পবিত্র করুন এবং আমার লজ্জাস্থানকে হেফাযত করুন।"
+      </div>
+
+      <div class="quote" style="margin-top: 12px;">
+        <strong>رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</strong><br>
+        "হে আমাদের প্রতিপালক! দুনিয়া ও আখিরাতে কল্যাণ দিন এবং জাহান্নামের আজাব থেকে রক্ষা করুন।"
+        <span class="quote-source">— (আল-কুরআন, ২:২০১)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <div class="footer-note">
+    <p>আল্লাহ আমাদের সবাইকে পাপ থেকে মুক্ত করুন। <span class="heart">🤲</span></p>
+    <p style="margin-top: 6px;">আপনি পারবেন ইনশাআল্লাহ।</p>
+  </div>
+
+</div>
+
+<!-- ===================== TOAST ===================== -->
+<div class="toast" id="toast">কপি হয়েছে</div>
+
+<script>
+// ===================== COPY =====================
+function copyContent(btn, id) {
+  const section = document.getElementById(id);
+  if (!section) return;
+
+  const text = section.innerText
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text)
+      .then(() => showCopied(btn))
+      .catch(() => fallbackCopy(text, btn));
+  } else {
+    fallbackCopy(text, btn);
+  }
+}
+
+function fallbackCopy(text, btn) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  ta.setSelectionRange(0, 99999);
+  try {
+    document.execCommand('copy');
+    showCopied(btn);
+  } catch (e) {
+    alert('কপি করা যায়নি');
+  }
+  document.body.removeChild(ta);
+}
+
+function showCopied(btn) {
+  const orig = btn.textContent;
+  btn.classList.add('copied');
+  btn.textContent = '✓ হয়েছে';
+  setTimeout(() => {
+    btn.classList.remove('copied');
+    btn.textContent = orig;
+  }, 1500);
+  showToast();
+}
+
+// ===================== TOAST =====================
+let toastTimer;
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1500);
+}
+</script>
+</body>
+  </html>
