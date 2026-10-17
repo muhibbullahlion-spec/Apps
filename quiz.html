@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a2332">
+<title>ইসলামিক কুইজ</title>
+<style>
+/* ===================== RESET ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a2332;
+  color: #e8edf3;
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ===================== HEADER ===================== */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 16px 20px;
+  background: #1a2332;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.back-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #e8edf3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.back-btn:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===================== CONTAINER ===================== */
+.container {
+  padding: 0 16px 40px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ===================== LEVEL SCREEN ===================== */
+.level-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.level-intro {
+  text-align: center;
+  padding: 20px 16px 24px;
+  color: #94a3b8;
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+
+.level-intro strong {
+  color: #fbbf24;
+}
+
+.level-card {
+  background: #212d3f;
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 3px solid #4ade80;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  width: 100%;
+}
+
+.level-card:active {
+  transform: scale(0.98);
+  background: #2a3a52;
+}
+
+.level-card.medium { border-left-color: #fbbf24; }
+.level-card.hard { border-left-color: #ef4444; }
+
+.level-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: rgba(74, 222, 128, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.level-card.medium .level-icon {
+  background: rgba(251, 191, 36, 0.12);
+}
+
+.level-card.hard .level-icon {
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.level-info {
+  flex: 1;
+}
+
+.level-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 3px;
+}
+
+.level-desc {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.level-arrow {
+  color: #64748b;
+  font-size: 20px;
+}
+
+/* ===================== QUIZ SCREEN ===================== */
+.quiz-screen {
+  display: none;
+}
+
+.quiz-screen.active {
+  display: block;
+}
+
+/* Progress Bar */
+.progress-wrap {
+  margin-bottom: 20px;
+}
+
+.progress-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.progress-level {
+  font-weight: 600;
+  color: #a5b4fc;
+}
+
+.progress-count {
+  color: #94a3b8;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #4f46e5;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+/* Question Card */
+.question-card {
+  background: #212d3f;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 3px solid #4f46e5;
+}
+
+.question-number {
+  font-size: 12px;
+  color: #a5b4fc;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.question-text {
+  font-size: 16px;
+  color: #ffffff;
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+/* Options */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option {
+  background: #212d3f;
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  color: inherit;
+  text-align: left;
+  width: 100%;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.option:active {
+  transform: scale(0.99);
+}
+
+.option-letter {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.option-text {
+  flex: 1;
+}
+
+/* Correct / Wrong */
+.option.correct {
+  background: rgba(22, 163, 74, 0.12);
+  border-color: #16a34a;
+}
+
+.option.correct .option-letter {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.option.wrong {
+  background: rgba(220, 38, 38, 0.12);
+  border-color: #dc2626;
+}
+
+.option.wrong .option-letter {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.option.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ===================== RESULT SCREEN ===================== */
+.result-screen {
+  display: none;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.result-screen.active {
+  display: block;
+}
+
+.result-emoji {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.result-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.result-subtitle {
+  font-size: 15px;
+  color: #94a3b8;
+  margin-bottom: 24px;
+}
+
+.result-score {
+  display: inline-block;
+  padding: 20px 40px;
+  background: #212d3f;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  border: 2px solid #4f46e5;
+}
+
+.score-value {
+  font-size: 42px;
+  font-weight: 700;
+  color: #fbbf24;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.score-total {
+  font-size: 15px;
+  color: #94a3b8;
+}
+
+.result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.btn {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+.btn-primary:active {
+  background: #4338ca;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #cbd5e1;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-ghost:active {
+  background: rgba(255, 255, 255, 0.05);
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="page-header">
+  <button class="back-btn" onclick="history.back()">🔙</button>
+  <h1 class="page-title">ইসলামিক কুইজ</h1>
+</header>
+
+<div class="container">
+
+  <!-- ===================== LEVEL SCREEN ===================== -->
+  <div class="level-screen" id="levelScreen">
+    <div class="level-intro">
+      ইসলামিক জ্ঞান পরীক্ষা করুন। <strong>3 Level </strong> — একটি লেভেল বেছে নিন 💠
+    </div>
+
+    <button class="level-card" onclick="startQuiz('easy')">
+      <div class="level-icon">🟢</div>
+      <div class="level-info">
+        <div class="level-name">সহজ</div>
+        <div class="level-desc">10 Easy quiz</div>
+      </div>
+      <span class="level-arrow">▶️</span>
+    </button>
+
+    <button class="level-card medium" onclick="startQuiz('medium')">
+      <div class="level-icon">🟡</div>
+      <div class="level-info">
+        <div class="level-name">মধ্যম</div>
+        <div class="level-desc">10 Medium quiz</div>
+      </div>
+      <span class="level-arrow">▶️</span>
+    </button>
+
+    <button class="level-card hard" onclick="startQuiz('hard')">
+      <div class="level-icon">🔴</div>
+      <div class="level-info">
+        <div class="level-name">কঠিন</div>
+        <div class="level-desc">10 high quiz</div>
+      </div>
+      <span class="level-arrow">▶️</span>
+    </button>
+  </div>
+
+  <!-- ===================== QUIZ SCREEN ===================== -->
+  <div class="quiz-screen" id="quizScreen">
+    <div class="progress-wrap">
+      <div class="progress-info">
+        <span class="progress-level" id="progressLevel">সহজ</span>
+        <span class="progress-count" id="progressCount">১/১০</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 10%;"></div>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-number" id="questionNumber">প্রশ্ন ১</div>
+      <div class="question-text" id="questionText"></div>
+    </div>
+
+    <div class="options" id="optionsList"></div>
+  </div>
+
+  <!-- ===================== RESULT SCREEN ===================== -->
+  <div class="result-screen" id="resultScreen">
+    <div class="result-emoji" id="resultEmoji">🎉</div>
+    <div class="result-title" id="resultTitle">চমৎকার!</div>
+    <div class="result-subtitle" id="resultSubtitle">আপনি ভালো করেছেন</div>
+
+    <div class="result-score">
+      <div class="score-value" id="scoreValue">০</div>
+      <div class="score-total">১০ এর মধ্যে</div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn btn-primary" onclick="restartLevel()">আবার চেষ্টা করুন</button>
+      <button class="btn btn-ghost" onclick="goHome()">লেভেল বদলান</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+//                  QUIZ DATA
+// ============================================================
+
+const QUIZ_DATA = {
+  easy: [
+    {
+      q: 'ইসলামের পাঁচটি স্তম্ভের প্রথমটি কোনটি?',
+      options: ['নামাজ', 'কালিমা', 'রোজা', 'যাকাত'],
+      answer: 1
+    },
+    {
+      q: 'দৈনিক কত ওয়াক্ত নামাজ ফরজ?',
+      options: ['৩ ওয়াক্ত', '৪ ওয়াক্ত', '৫ ওয়াক্ত', '৬ ওয়াক্ত'],
+      answer: 2
+    },
+    {
+      q: 'পবিত্র কুরআনে মোট কতটি সূরা আছে?',
+      options: ['১০০', '১১০', '১১৪', '১২০'],
+      answer: 2
+    },
+    {
+      q: 'রাসূল (সা.) এর জন্ম কোন শহরে?',
+      options: ['মদীনা', 'মক্কা', 'তায়েফ', 'জেদ্দা'],
+      answer: 1
+    },
+    {
+      q: 'কিবলা কোন দিকে?',
+      options: ['মদীনা', 'কাবা', 'জেরুজালেম', 'মিশর'],
+      answer: 1
+    },
+    {
+      q: 'রমজান মাসে কী পালন করা হয়?',
+      options: ['হজ', 'রোজা', 'কুরবানি', 'আকিকা'],
+      answer: 1
+    },
+    {
+      q: 'সপ্তাহের কোন দিন জুমার নামাজ হয়?',
+      options: ['সোমবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'],
+      answer: 2
+    },
+    {
+      q: 'প্রথম নবী কে ছিলেন?',
+      options: ['আদম (আ.)', 'নূহ (আ.)', 'ইব্রাহীম (আ.)', 'মূসা (আ.)'],
+      answer: 0
+    },
+    {
+      q: 'শেষ নবী কে?',
+      options: ['ঈসা (আ.)', 'মুহাম্মদ (সা.)', 'মূসা (আ.)', 'ইউসুফ (আ.)'],
+      answer: 1
+    },
+    {
+      q: 'কুরআন কোন ভাষায় নাজিল হয়েছে?',
+      options: ['উর্দু', 'ফারসি', 'আরবি', 'হিব্রু'],
+      answer: 2
+    }
+  ],
+  medium: [
+    {
+      q: 'কুরআনের সবচেয়ে বড় সূরা কোনটি?',
+      options: ['সূরা ইয়াসিন', 'সূরা বাকারা', 'সূরা নূর', 'সূরা রহমান'],
+      answer: 1
+    },
+    {
+      q: 'কুরআনের সবচেয়ে ছোট সূরা কোনটি?',
+      options: ['সূরা কাউসার', 'সূরা ইখলাস', 'সূরা ফাতিহা', 'সূরা আসর'],
+      answer: 0
+    },
+    {
+      q: 'প্রথম খলিফা কে ছিলেন?',
+      options: ['উমর (রা.)', 'উসমান (রা.)', 'আবু বকর (রা.)', 'আলী (রা.)'],
+      answer: 2
+    },
+    {
+      q: 'মিরাজের রাতে কোন ইবাদত ফরজ হয়?',
+      options: ['রোজা', 'হজ', 'নামাজ', 'যাকাত'],
+      answer: 2
+    },
+    {
+      q: 'যাকাতের নিসাব পরিমাণ কত?',
+      options: ['২.৫%', '৫%', '১০%', '২০%'],
+      answer: 0
+    },
+    {
+      q: 'হিজরতের পর প্রথম মসজিদ কোনটি?',
+      options: ['মসজিদে নববী', 'মসজিদে কুবা', 'মসজিদুল হারাম', 'মসজিদুল আকসা'],
+      answer: 1
+    },
+    {
+      q: 'রাসূল (সা.) কত বছর নবুয়ত পান?',
+      options: ['২০ বছর', '২৩ বছর', '২৫ বছর', '৩০ বছর'],
+      answer: 1
+    },
+    {
+      q: 'কোন সূরাকে "কুরআনের হৃদয়" বলা হয়?',
+      options: ['সূরা ইয়াসিন', 'সূরা বাকারা', 'সূরা নূর', 'সূরা হুদ'],
+      answer: 0
+    },
+    {
+      q: 'সাহাবীদের মধ্যে সবচেয়ে বেশি হাদিস বর্ণনা কে করেছেন?',
+      options: ['আবু হুরায়রা (রা.)', 'আনাস (রা.)', 'আয়েশা (রা.)', 'ইবনে উমর (রা.)'],
+      answer: 0
+    },
+    {
+      q: 'কুরআনে কতজন নবীর নাম উল্লেখ আছে?',
+      options: ['১৫ জন', '২০ জন', '২৫ জন', '৩০ জন'],
+      answer: 2
+    }
+  ],
+  hard: [
+    {
+      q: 'সহীহ বুখারীর সংকলক ইমাম বুখারীর পূর্ণ নাম কী?',
+      options: ['মুহাম্মদ ইবনে ইসমাইল', 'মুহাম্মদ ইবনে ঈসা', 'মুসলিম ইবনে হাজ্জাজ', 'আবু দাউদ'],
+      answer: 0
+    },
+    {
+      q: 'হাদিসের সবচেয়ে নির্ভরযোগ্য কিতাব কোনটি?',
+      options: ['সহীহ মুসলিম', 'সহীহ বুখারী', 'সুনানে আবু দাউদ', 'তিরমিযী'],
+      answer: 1
+    },
+    {
+      q: 'ইমাম আহমাদ ইবনে হাম্বল কোন মাযহাবের প্রতিষ্ঠাতা?',
+      options: ['হানাফী', 'মালেকী', 'শাফেয়ী', 'হাম্বলী'],
+      answer: 3
+    },
+    {
+      q: 'কোন যুদ্ধে ৭০ জন হাফেজ শহীদ হন?',
+      options: ['বদর', 'উহুদ', 'ইয়ামামা', 'খন্দক'],
+      answer: 2
+    },
+    {
+      q: 'রাসূল (সা.) এর ওফাতের সময় তাঁর বয়স কত ছিল?',
+      options: ['৬০ বছর', '৬৩ বছর', '৬৫ বছর', '৭০ বছর'],
+      answer: 1
+    },
+    {
+      q: '"ফিকহুল আকবর" কে লিখেছেন?',
+      options: ['ইমাম আবু হানিফা', 'ইমাম শাফেয়ী', 'ইমাম মালিক', 'ইমাম আহমাদ'],
+      answer: 0
+    },
+    {
+      q: 'কুরআনে "বাকারাহ" শব্দের অর্থ কী?',
+      options: ['উট', 'গরু', 'ছাগল', 'ঘোড়া'],
+      answer: 1
+    },
+    {
+      q: 'কোন সাহাবীকে "সাইফুল্লাহ" বলা হয়?',
+      options: ['খালিদ বিন ওয়ালিদ (রা.)', 'সাদ বিন আবি ওয়াক্কাস (রা.)', 'আবু উবাইদা (রা.)', 'তালহা (রা.)'],
+      answer: 0
+    },
+    {
+      q: 'হিজরি সনের সূচনা কোন ঘটনা থেকে?',
+      options: ['মক্কা বিজয়', 'হিজরত', 'বদর যুদ্ধ', 'মিরাজ'],
+      answer: 1
+    },
+    {
+      q: 'পবিত্র কুরআনে মোট কতটি পারা (জুয)?',
+      options: ['২০ পারা', '২৫ পারা', '৩০ পারা', '৪০ পারা'],
+      answer: 2
+    }
+  ]
+};
+
+const LEVEL_NAMES = {
+  easy: 'সহজ',
+  medium: 'মধ্যম',
+  hard: 'কঠিন'
+};
+
+// বাংলা সংখ্যা
+function toBangla(num) {
+  const bn = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+  return String(num).replace(/\d/g, d => bn[d]);
+}
+
+// ============================================================
+//                  STATE
+// ============================================================
+
+let currentLevel = 'easy';
+let currentQuestions = [];
+let currentIndex = 0;
+let score = 0;
+let answered = false;
+
+// ============================================================
+//                  ELEMENTS
+// ============================================================
+
+const levelScreen = document.getElementById('levelScreen');
+const quizScreen = document.getElementById('quizScreen');
+const resultScreen = document.getElementById('resultScreen');
+
+const progressLevel = document.getElementById('progressLevel');
+const progressCount = document.getElementById('progressCount');
+const progressFill = document.getElementById('progressFill');
+const questionNumber = document.getElementById('questionNumber');
+const questionText = document.getElementById('questionText');
+const optionsList = document.getElementById('optionsList');
+
+const resultEmoji = document.getElementById('resultEmoji');
+const resultTitle = document.getElementById('resultTitle');
+const resultSubtitle = document.getElementById('resultSubtitle');
+const scoreValue = document.getElementById('scoreValue');
+
+// ============================================================
+//                  SCREENS
+// ============================================================
+
+function showScreen(name) {
+  levelScreen.style.display = name === 'level' ? 'block' : 'none';
+  quizScreen.classList.toggle('active', name === 'quiz');
+  resultScreen.classList.toggle('active', name === 'result');
+}
+
+// ============================================================
+//                  QUIZ LOGIC
+// ============================================================
+
+function startQuiz(level) {
+  currentLevel = level;
+  currentQuestions = [...QUIZ_DATA[level]];
+  currentIndex = 0;
+  score = 0;
+  answered = false;
+
+  progressLevel.textContent = LEVEL_NAMES[level];
+  showScreen('quiz');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  answered = false;
+  const q = currentQuestions[currentIndex];
+  const total = currentQuestions.length;
+  const num = currentIndex + 1;
+
+  // Progress
+  progressCount.textContent = toBangla(num) + '/' + toBangla(total);
+  progressFill.style.width = ((num) / total * 100) + '%';
+
+  // Question
+  questionNumber.textContent = 'প্রশ্ন ' + toBangla(num);
+  questionText.textContent = q.q;
+
+  // Options
+  const letters = ['ক', 'খ', 'গ', 'ঘ'];
+  optionsList.innerHTML = q.options.map((opt, i) => `
+    <button class="option" onclick="selectOption(${i})">
+      <span class="option-letter">${letters[i]}</span>
+      <span class="option-text">${opt}</span>
+    </button>
+  `).join('');
+}
+
+function selectOption(index) {
+  if (answered) return;
+  answered = true;
+
+  const q = currentQuestions[currentIndex];
+  const buttons = optionsList.querySelectorAll('.option');
+
+  buttons.forEach((btn, i) => {
+    btn.classList.add('disabled');
+    if (i === q.answer) {
+      btn.classList.add('correct');
+    } else if (i === index && i !== q.answer) {
+      btn.classList.add('wrong');
+    }
+  });
+
+  if (index === q.answer) {
+    score++;
+  }
+
+  // ১.২ সেকেন্ড পর পরের প্রশ্ন
+  setTimeout(() => {
+    currentIndex++;
+    if (currentIndex < currentQuestions.length) {
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  }, 1200);
+}
+
+// ============================================================
+//                  RESULT
+// ============================================================
+
+function showResult() {
+  showScreen('result');
+
+  const total = currentQuestions.length;
+  scoreValue.textContent = toBangla(score);
+
+  // রেজাল্ট মেসেজ
+  let emoji = '🎉';
+  let title = '';
+  let subtitle = '';
+
+  if (score === total) {
+    emoji = '🏆';
+    title = 'অসাধারণ!';
+    subtitle = 'সব প্রশ্ন সঠিক! আপনি একজন আলেম।';
+  } else if (score >= 8) {
+    emoji = '🎉';
+    title = 'চমৎকার!';
+    subtitle = 'আপনার ইসলামিক জ্ঞান প্রশংসনীয়।';
+  } else if (score >= 6) {
+    emoji = '👏';
+    title = 'ভালো করেছেন!';
+    subtitle = 'আরো একটু চেষ্টা করলে সেরা হবেন।';
+  } else if (score >= 4) {
+    emoji = '📖';
+    title = 'মাঝামাঝি!';
+    subtitle = 'আরো পড়াশোনা দরকার।';
+  } else {
+    emoji = '🌱';
+    title = 'চেষ্টা চালিয়ে যান!';
+    subtitle = 'প্রতিদিন পড়ুন, ইনশাআল্লাহ ভালো করবেন।';
+  }
+
+  resultEmoji.textContent = emoji;
+  resultTitle.textContent = title;
+  resultSubtitle.textContent = subtitle;
+}
+
+// ============================================================
+//                  ACTIONS
+// ============================================================
+
+function restartLevel() {
+  startQuiz(currentLevel);
+}
+
+function goHome() {
+  showScreen('level');
+}
+
+// ============================================================
+//                  INIT
+// ============================================================
+
+showScreen('level');
+</script>
+</body>
+  </html>
