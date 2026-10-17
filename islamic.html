@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a2332">
+<title>ইসলামিক পডকাস্ট</title>
+<style>
+/* ===================== RESET ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a2332;
+  color: #e8edf3;
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ===================== HEADER ===================== */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 16px 20px;
+  background: #1a2332;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.back-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #e8edf3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.back-btn:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  flex: 1;
+}
+
+/* ===================== CONTAINER ===================== */
+.container {
+  padding: 0 16px 40px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ===================== INTRO ===================== */
+.intro {
+  padding: 4px 4px 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.intro-text {
+  font-size: 15px;
+  color: #cbd5e1;
+  line-height: 1.8;
+}
+
+.intro-text strong {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+/* ===================== VIDEO CARD ===================== */
+.video-card {
+  background: #212d3f;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.2s;
+}
+
+.video-card:active {
+  transform: scale(0.98);
+}
+
+/* থাম্বনেইল */
+.video-thumb {
+  width: 100%;
+  height: 180px;
+  background: #141c28;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* প্লে বাটন ওভারলে */
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.play-btn {
+  width: 60px;
+  height: 60px;
+  background: rgba(220, 38, 38, 0.95);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(220, 38, 38, 0.5);
+}
+
+.play-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+  margin-left: 3px; /* ত্রিভুজাকার প্লে আইকন সেন্টারে আনতে */
+}
+
+/* ডিউরেশন ব্যাজ */
+.duration-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ভিডিও ইনফো */
+.video-info {
+  padding: 14px 16px;
+}
+
+.video-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.video-speaker {
+  font-size: 13px;
+  color: #fbbf24;
+  font-weight: 500;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.video-desc {
+  font-size: 13px;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+/* ===================== NOTE ===================== */
+.note {
+  background: rgba(251, 191, 36, 0.06);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.note-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #fbbf24;
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="page-header">
+  <button class="back-btn" onclick="history.back()">🔙</button>
+  <h1 class="page-title">ইসলামিক পডকাস্ট</h1>
+</header>
+
+<div class="container">
+
+  <!-- ===================== INTRO ===================== -->
+  <div class="intro">
+    <p class="intro-text">
+      নিচের যেকোনো ভিডিওতে ক্লিক করলে সরাসরি ইউটিউবে দেখা যাবে।
+    </p>
+  </div>
+
+  <!-- ===================== VIDEO LIST ===================== -->
+
+  <!-- ⚠️ নিচের ভিডিও আইডি (v=...) এবং থাম্বনেইল আপনার পছন্দমতো বদলে নিন -->
+
+  <!-- ভিডিও ১ -->
+  <a href="https://www.youtube.com/watch?v=hqU3ivN8Q3o" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="video-card">
+    <div class="video-thumb">
+      <!-- ভিডিওর থাম্বনেইল লিংক -->
+      <img src="https://img.youtube.com/vi/hqU3ivN8Q3o/maxresdefault.jpg" alt="Thumbnail">
+      <div class="play-overlay">
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+      <span class="duration-badge">পডকাস্ট</span>
+    </div>
+    <div class="video-info">
+      <div class="video-title">হস্তমৈথুন ও পর্নোগ্রাফি থেকে মুক্তির উপায়</div>
+      <div class="video-speaker">🎙️ আনিসুর রহমান আশরাফী</div>
+      <div class="video-desc">এই আসক্তি থেকে বাঁচার কার্যকরী ইসলামিক দিকনির্দেশনা।</div>
+    </div>
+  </a>
+
+  <!-- ভিডিও ২ -->
+  <a href="https://www.youtube.com/aw_G9F4rPl8_2" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="video-card">
+    <div class="video-thumb">
+      <img src="https://img.youtube.com/vi/aw_G9F4rPl8/maxresdefault.jpg" alt="Thumbnail">
+      <div class="play-overlay">
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+      <span class="duration-badge">পডকাস্ট</span>
+    </div>
+    <div class="video-info">
+      <div class="video-title">নফসের চিকিৎসা: কীভাবে আত্মনিয়ন্ত্রণ শিখবেন?</div>
+      <div class="video-speaker">🎙️ মিজানুর রহমান আজহারী</div>
+      <div class="video-desc">শয়তানের ধোঁকা থেকে বাঁচার উপায় ও তাওবার গুরুত্ব।</div>
+    </div>
+  </a>
+
+  <!-- ভিডিও ৩ -->
+  <a href="https://www.youtube.com/watch?v=gbBb7n8YrNI" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="video-card">
+    <div class="video-thumb">
+      <img src="https://img.youtube.com/vi/gbBb7n8YrNI/maxresdefault.jpg" alt="Thumbnail">
+      <div class="play-overlay">
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+      <span class="duration-badge">পডকাস্ট</span>
+    </div>
+    <div class="video-info">
+      <div class="video-title">দৃষ্টি সংযত রাখার ফজিলত ও পুরস্কার</div>
+      <div class="video-desc">যে ব্যক্তি দৃষ্টি সংযত রাখে, তার জন্য জান্নাতের সুসংবাদ।</div>
+    </div>
+  </a>
+
+  <!-- ===================== NOTE ===================== -->
+  <div class="note">
+    <div class="note-title">📍</div>
+    ʸᵒᵘ ʷⁱˡˡ ⁿᵉᵉᵈ ⁱⁿᵗᵉʳⁿᵉᵗ ᵗᵒ ʷᵃᵗᶜʰ ᵗʰᵉ ᵛⁱᵈᵉᵒˢ. ⁱᶠ ᵗʰᵉ ʸᵒᵘᵗᵘᵇᵉ ᵃᵖᵖ ⁱˢ ⁱⁿˢᵗᵃˡˡᵉᵈ, ⁱᵗ ʷⁱˡˡ ᵒᵖᵉⁿ ᵈⁱʳᵉᶜᵗˡʸ ⁱⁿ ᵗʰᵉ ʸᵒᵘᵗᵘᵇᵉ ᵃᵖᵖ.
+  </div>
+
+</div>
+
+</body>
+</html>
