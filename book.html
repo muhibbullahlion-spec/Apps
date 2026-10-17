@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a2332">
+<title>ইসলামিক বই</title>
+<style>
+/* ===================== RESET ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a2332;
+  color: #e8edf3;
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* ===================== HEADER ===================== */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 16px 20px;
+  background: #1a2332;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.back-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #e8edf3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.back-btn:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===================== CONTAINER ===================== */
+.container {
+  padding: 0 16px 40px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ===================== INTRO ===================== */
+.intro {
+  padding: 4px 4px 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.intro-text {
+  font-size: 15px;
+  color: #cbd5e1;
+  line-height: 1.8;
+}
+
+.intro-text strong {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+/* ===================== BOOK CARD ===================== */
+.book {
+  background: #212d3f;
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  border-left: 3px solid #4f46e5;
+}
+
+/* ===================== BOOK COVER ===================== */
+.book-cover {
+  width: 60px;
+  height: 80px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.book-cover.alt1 { background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%); }
+.book-cover.alt2 { background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); }
+.book-cover.alt3 { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); }
+.book-cover.alt4 { background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%); }
+
+/* ===================== BOOK INFO ===================== */
+.book-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.book-title {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.book-author {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.book-desc {
+  font-size: 13.5px;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* ===================== DOWNLOAD BUTTON ===================== */
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: #4f46e5;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.download-btn:active {
+  transform: scale(0.96);
+  background: #4338ca;
+}
+
+.download-icon {
+  font-size: 14px;
+}
+
+/* ===================== NOTE BOX ===================== */
+.note-box {
+  background: rgba(251, 191, 36, 0.06);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 20px 0;
+  font-size: 13.5px;
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+.note-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fbbf24;
+  margin-bottom: 6px;
+}
+
+/* ===================== FOOTER ===================== */
+.footer-note {
+  text-align: center;
+  margin-top: 30px;
+  padding: 16px;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="page-header">
+  <button class="back-btn" onclick="history.back()">🔙</button>
+  <h1 class="page-title">ইসলামিক বই</h1>
+</header>
+
+<div class="container">
+
+  <!-- ===================== INTRO ===================== -->
+  <div class="intro">
+    <p class="intro-text">
+      দ্বীনি জ্ঞান অর্জনের জন্য <strong>৫টি গুরুত্বপূর্ণ ইসলামিক বই</strong>। প্রতিটি বই PDF আকারে ডাউনলোড করা যাবে। মোবাইলে পড়তে বা প্রিন্ট করতে পারবেন।
+    </p>
+  </div>
+
+  <!-- ===================== BOOK LIST ===================== -->
+  <div id="bookList">
+
+    <!-- ========== বই ১ ========== -->
+    <div class="book">
+      <div class="book-cover">📖</div>
+      <div class="book-info">
+        <div class="book-title">মুক্ত বাতাসের খোজে</div>
+        <div class="book-author">আসিফ আদনান</div>
+        <div class="book-desc">এই বই পড়ে হাজার হাজার যুবক অন্ধকার থেকে ফিরে এসেছ।</div>
+        <a href="https://www.islamicboisomahar.com/book/1682/book" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="download-btn">
+          <span class="download-icon">⬇️</span>
+          <span>PDF ডাউনলোড</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ========== বই ২ ========== -->
+    <div class="book">
+      <div class="book-cover alt1">📗</div>
+      <div class="book-info">
+        <div class="book-title">গুনাহের ক্ষতি</div>
+        <div class="book-author">মুফতী মুহাম্মদ তাকী উসমানী</div>
+        <div class="book-desc">ইসলামিক বই, আত্মশুদ্ধি ও অনুপ্রেরণামূলক।</div>
+        <a href="https://boimate.com/gonaher-khoti-pdf" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="download-btn">
+          <span class="download-icon">⬇️</span>
+          <span>PDF ডাউনলোড</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ========== বই ৩ ========== -->
+    <div class="book">
+      <div class="book-cover alt2">📕</div>
+      <div class="book-info">
+        <div class="book-title">আর-রাহীকুল মাখতূম</div>
+        <div class="book-author">সফিউর রহমান মোবারকপুরী</div>
+        <div class="book-desc">রাসূল (সা.) এর জীবনী। সীরাত গ্রন্থের মধ্যে সর্বাধিক জনপ্রিয় বই।</div>
+        <a href="https://quraneralo.com/ar-rahiqul-makhtum/?amp" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="download-btn">
+          <span class="download-icon">⬇️</span>
+          <span>PDF ডাউনলোড</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ========== বই ৫ ========== -->
+    <div class="book">
+      <div class="book-cover alt4">📘</div>
+      <div class="book-info">
+        <div class="book-title">হায়াতুস সাহাবা</div>
+        <div class="book-author">মাওলানা মুহাম্মদ ইউসুফ কান্ধলভী (রহ.)</div>
+        <div class="book-desc">সাহাবীদের জীবনী। তাঁদের ত্যাগ, ইবাদত ও ইসলামের প্রতি ভালোবাসার দৃষ্টান্ত।</div>
+        <a href="https://boimate.com/hayatus-sahaba-rh-pdf" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="download-btn">
+          <span class="download-icon">⬇️</span>
+          <span>PDF ডাউনলোড</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===================== NOTE ===================== -->
+  <div class="note-box">
+    <div class="note-title">📌 ব্যবহারের নিয়ম</div>
+    ডাউনলোড করতে <strong>ইন্টারনেট</strong> দরকার। ডাউনলোড হয়ে গেলে <strong>অফলাইনে</strong> পড়তে পারবেন। ফাইল সেভ হবে আপনার <strong>Downloads</strong> ফোল্ডারে।
+  </div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <div class="footer-note">
+    <p>📚 দ্বীনি জ্ঞান অর্জন করুন — এটাই শ্রেষ্ঠ ইবাদত।</p>
+  </div>
+
+</div>
+
+</body>
+  </html>
