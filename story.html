@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a2332">
+<title>ফিরে আসার উপায়</title>
+<style>
+/* ===================== RESET ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a2332;
+  color: #e8edf3;
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* ===================== HEADER ===================== */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 16px 20px;
+  background: #1a2332;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.back-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #e8edf3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.back-btn:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===================== CONTAINER ===================== */
+.container {
+  padding: 0 16px 40px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ===================== INTRO ===================== */
+.intro {
+  padding: 4px 4px 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.intro-text {
+  font-size: 15.5px;
+  color: #cbd5e1;
+  line-height: 1.85;
+  text-align: justify;
+}
+
+.intro-text strong {
+  color: #4ade80;
+  font-weight: 600;
+}
+
+/* ===================== SECTION ===================== */
+.section {
+  margin-bottom: 22px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* ===================== COPY BUTTON ===================== */
+.copy-btn {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #a5b4fc;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.copy-btn:active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.copy-btn.copied {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+/* ===================== STORY CARD ===================== */
+.story-card {
+  background: #212d3f;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  border-left: 3px solid #4ade80;
+}
+
+.story-label {
+  display: inline-block;
+  font-size: 11px;
+  color: #4ade80;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.story-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.story-text {
+  font-size: 15px;
+  color: #d1d9e6;
+  line-height: 1.9;
+  text-align: justify;
+}
+
+.story-text strong {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+.story-text em {
+  color: #7dd3fc;
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* ===================== QUOTE ===================== */
+.quote {
+  padding: 10px 0 10px 14px;
+  border-left: 2px solid #fbbf24;
+  margin: 14px 0;
+  font-size: 15px;
+  color: #fef3c7;
+  font-style: italic;
+  line-height: 1.85;
+}
+
+.quote-source {
+  display: block;
+  text-align: right;
+  font-size: 13px;
+  color: #94a3b8;
+  font-style: normal;
+  margin-top: 6px;
+}
+
+/* ===================== LIST CARD ===================== */
+.card {
+  background: #212d3f;
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card ul li {
+  position: relative;
+  padding: 10px 0 10px 22px;
+  font-size: 15px;
+  color: #d1d9e6;
+  line-height: 1.85;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.card ul li:last-child {
+  border-bottom: none;
+}
+
+.card ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  color: #4ade80;
+  font-weight: 500;
+}
+
+.card ul li strong {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+/* ===================== MOTIVATION BOX ===================== */
+.motivation {
+  background: linear-gradient(135deg, #1e2a3a 0%, #212d3f 100%);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin: 20px 0;
+  text-align: center;
+  border-top: 2px solid #4ade80;
+}
+
+.motivation-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.motivation-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #4ade80;
+  margin-bottom: 10px;
+}
+
+.motivation-text {
+  font-size: 15px;
+  color: #e2e8f0;
+  line-height: 1.85;
+  text-align: center;
+}
+
+.motivation-text strong {
+  color: #fbbf24;
+}
+
+/* ===================== STEPS ===================== */
+.step {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.step:last-child {
+  border-bottom: none;
+}
+
+.step-number {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(74, 222, 128, 0.12);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  color: #4ade80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.step-desc {
+  font-size: 14.5px;
+  color: #94a3b8;
+  line-height: 1.75;
+}
+
+/* ===================== TOAST ===================== */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #16a34a;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.3);
+  z-index: 2000;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===================== FOOTER ===================== */
+.footer-note {
+  text-align: center;
+  margin-top: 30px;
+  padding: 20px;
+  color: #64748b;
+  font-size: 13.5px;
+  line-height: 1.8;
+}
+
+.footer-note .heart {
+  color: #4ade80;
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="page-header">
+  <button class="back-btn" onclick="history.back()">🔙</button>
+  <h1 class="page-title">ফিরে আসার উপায়</h1>
+</header>
+
+<div class="container">
+
+  <!-- ===================== INTRO ===================== -->
+  <div class="intro">
+    <p class="intro-text">
+      হস্তমৈথুন ও যেনার আসক্তি থেকে <strong>ফিরে আসা সম্ভব</strong>। যত গভীরেই ডুবে থাকুন, আল্লাহর রহমত অসীম। এই পেজে থাকা গল্প ও উপায়গুলো আপনার মুক্তির পথ দেখাবে ইনশাআল্লাহ।
+    </p>
+  </div>
+
+  <!-- ===================== SECTION ১: একটি গল্প ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🌟 ফিরে আসার গল্প</div>
+      <button class="copy-btn" onclick="copyContent(this, 'story1')">কপি</button>
+    </div>
+
+    <div class="story-card" id="story1">
+      <span class="story-label">সত্য ঘটনা</span>
+      <div class="story-title">অন্ধকার থেকে আলোয়</div>
+
+      <p class="story-text">
+        এক যুবক ছিলেন। বয়স আঠারো। কলেজে পড়তেন। কিন্তু রাত জেগে তিনি এক গোপন অভ্যাসে ডুবে থাকতেন। <em>হস্তমৈথুন।</em> প্রথমে সপ্তাহে একবার, তারপর প্রতিদিন। শরীর দুর্বল হতে লাগলো। চোখের নিচে কালি পড়লো। বন্ধুদের সাথে কথা বলতে ভয় পেতেন।
+      </p>
+
+      <p class="story-text" style="margin-top: 10px;">
+        এক রাতে তিনি নামাজে দাঁড়ালেন। কান্না এলো। বললেন: <strong>"হে আল্লাহ! আমি আর পারছি না। আমাকে মুক্তি দিন।"</strong> সেদিন থেকে তিনি সিদ্ধান্ত নিলেন — মোবাইল রাতে বন্ধ রাখবেন, ফজরের আগে উঠবেন, পর্নোগ্রাফি সম্পূর্ণ বাদ দেবেন।
+      </p>
+
+      <p class="story-text" style="margin-top: 10px;">
+        প্রথম সপ্তাহ কঠিন ছিল। দ্বিতীয় সপ্তাহ আরো কঠিন। কিন্তু তিনি হাল ছাড়লেন না। এক মাস পর নিজের মধ্যে পরিবর্তন দেখতে পেলেন — মুখে নূর, শরীরে শক্তি, হৃদয়ে শান্তি। আজ তিনি সুস্থ, সফল এবং বিবাহিত।
+      </p>
+
+      <p class="story-text" style="margin-top: 10px;">
+        <strong>তিনি বলেন:</strong> "আল্লাহর কাছে একজন মানুষ যদি সত্যিই ফিরতে চায় — আল্লাহ তাকে ফিরিয়ে নেন।"
+      </p>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION ২: অনুপ্রেরণা ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title"> </div>
+      <button class="copy-btn" onclick="copyContent(this, 'motivation')">কপি</button>
+    </div>
+
+    <div class="motivation" id="motivation">
+      <div class="motivation-icon">🌱</div>
+      <div class="motivation-title">হাল ছাড়বেন না</div>
+      <p class="motivation-text">
+        আপনি যদি <strong>আজ</strong> আবার শুরু করেন — সেটাই আপনার বিজয়। গতকাল যা হয়েছে, তা আল্লাহ মাফ করে দিতে পারেন। আজকের চেষ্টাই আপনার ভবিষ্যৎ গড়বে।
+      </p>
+    </div>
+
+    <div class="story-card" style="border-left-color: #fbbf24;">
+      <p class="story-text">
+        রাসূল (সা.) বলেছেন: <strong>"প্রত্যেক আদম সন্তানই ভুল করে। আর উত্তম ভুলকারী হলো সে, যে তাওবা করে।"</strong>
+      </p>
+      <p class="quote-source">— (সুনানে তিরমিযী, ২৪৯৯)</p>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION ৩: ফিরে আসার ১০ ধাপ ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🪜 ফিরে আসার ১০ ধাপ</div>
+      <button class="copy-btn" onclick="copyContent(this, 'steps')">কপি</button>
+    </div>
+
+    <div class="card" id="steps">
+
+      <div class="step">
+        <div class="step-number">১</div>
+        <div class="step-content">
+          <div class="step-title">আন্তরিক তাওবা</div>
+          <div class="step-desc">আল্লাহর কাছে মন থেকে ক্ষমা চান। বলুন — "হে আল্লাহ! আমি আর ফিরবো না।"</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">২</div>
+        <div class="step-content">
+          <div class="step-title">পর্নোগ্রাফি সম্পূর্ণ বন্ধ</div>
+          <div class="step-desc">সব ধরনের অশ্লীল কনটেন্ট — ভিডিও, ছবি, সাইট — চিরতরে বাদ দিন।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">৩</div>
+        <div class="step-content">
+          <div class="step-title">মোবাইল রাতে দূরে রাখুন</div>
+          <div class="step-desc">রাতে ঘুমানোর আগে মোবাইল অন্য রুমে রাখুন। এটি সবচেয়ে কার্যকর।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">৪</div>
+        <div class="step-content">
+          <div class="step-title">৫ ওয়াক্ত নামাজ</div>
+          <div class="step-desc">সময়মতো নামাজ পড়ুন। বিশেষ করে ফজর ও ইশা। নামাজ আপনাকে শক্তিশালী করবে।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">৫</div>
+        <div class="step-content">
+          <div class="step-title">সাপ্তাহিক রোজা</div>
+          <div class="step-desc">প্রতি সপ্তাহে অন্তত ২ দিন রোজা রাখুন। রাসূল (সা.) এই পরামর্শ দিয়েছেন।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">৬</div>
+        <div class="step-content">
+          <div class="step-title">শরীরচর্চা শুরু করুন</div>
+          <div class="step-desc">প্রতিদিন অন্তত ৩০ মিনিট ব্যায়াম বা হাঁটুন। শরীর ব্যস্ত থাকলে মন শান্ত থাকে।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">৭</div>
+        <div class="step-content">
+          <div class="step-title">খারাপ সঙ্গ ত্যাগ করুন</div>
+          <div class="step-desc">যে বন্ধুরা খারাপ কাজে উৎসাহ দেয়, তাদের থেকে দূরত্ব রাখুন।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">৮</div>
+        <div class="step-content">
+          <div class="step-title">ফাঁকা সময় বাদ দিন</div>
+          <div class="step-desc">একা থাকবেন না। কাজ, পড়া, ঘোরাফেরা — কিছু করুন। ফাঁকা সময়ই শত্রু।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">৯</div>
+        <div class="step-content">
+          <div class="step-title">সামর্থ্য থাকলে বিয়ে</div>
+          <div class="step-desc">রাসূল (সা.) বলেছেন — বিয়ে হলো সবচেয়ে বড় হেফাযত। সময় হলে বিয়ে করুন।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">১০</div>
+        <div class="step-content">
+          <div class="step-title">সবসময় দোয়া করুন</div>
+          <div class="step-desc">আল্লাহর সাহায্য ছাড়া কিছুই সম্ভব নয়। প্রতিদিন দোয়া করুন, যিকির করুন।</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== SECTION ৪: হাদিস ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">📖 হাদিস</div>
+      <button class="copy-btn" onclick="copyContent(this, 'hadith')">কপি</button>
+    </div>
+
+    <div class="story-card" id="hadith" style="border-left-color: #fbbf24;">
+      <div class="quote">
+        রাসূল (সা.) বলেছেন: <strong>"আল্লাহ তা'আলা বলেন — হে আদম সন্তান! যতক্ষণ তুমি আমাকে ডাকতে থাকো এবং আমার উপর ভরসা রাখো, আমি তোমার সব গুনাহ মাফ করে দেবো, কোনো পরোয়া না করে।"</strong>
+        <span class="quote-source">— (সুনানে তিরমিযী, ৩৫৪০)</span>
+      </div>
+
+      <div class="quote" style="margin-top: 16px;">
+        রাসূল (সা.) বলেছেন: <strong>"যে ব্যক্তি আন্তরিকভাবে তাওবা করে, সে যেন নিষ্পাপ হয়ে যায়।"</strong>
+        <span class="quote-source">— (সুনানে ইবনে মাজাহ, ৪২৫০)</span>
+      </div>
+
+      <div class="quote" style="margin-top: 16px;">
+        রাসূল (সা.) বলেছেন: <strong>"তোমরা যুবকগণ! তোমাদের মধ্যে যার সামর্থ্য আছে, সে যেন বিয়ে করে। কারণ এটা দৃষ্টি সংযত রাখে ও লজ্জাস্থান হেফাযত করে।"</strong>
+        <span class="quote-source">— (সহীহ বুখারী, ১৯০৫)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION ৫: শেষ কথা ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🤲 শেষ কথা</div>
+      <button class="copy-btn" onclick="copyContent(this, 'lastword')">কপি</button>
+    </div>
+
+    <div class="card" id="lastword">
+      <ul>
+        <li><strong>আপনি একা নন।</strong> আপনি ৫০% যুবকের মতো সমস্যায় আছেন — কেউ বলতে পারে না, কিন্তু সবাই ভুগছে।</li>
+        <li><strong>আজ শুরু করুন।</strong> "কাল থেকে করবো" — এটা শয়তানের ফাঁদ। আজই শুরু করুন।</li>
+        <li><strong>একদিন হারলেও চলবে।</strong> আবার উঠুন। ১০০ বার পড়ে গেলে ১০১ বার উঠুন।</li>
+        <li><strong>আল্লাহ ক্ষমাশীল।</strong> তিনি আপনাকে ফিরিয়ে নিতে প্রস্তুত — শুধু আপনি ফিরতে চান।</li>
+        <li><strong>আপনি সক্ষম।</strong> আপনি যা ভাবছেন তার চেয়ে শক্তিশালী। বিশ্বাস রাখুন।</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <div class="footer-note">
+    <p>আল্লাহ আপনাকে এই গোনাহ থেকে মুক্ত করুন। <span class="heart">🤲</span></p>
+    <p style="margin-top: 6px;">আপনি পারবেন। ইনশাআল্লাহ।</p>
+  </div>
+
+</div>
+
+<!-- ===================== TOAST ===================== -->
+<div class="toast" id="toast">কপি হয়েছে</div>
+
+<script>
+// ===================== COPY =====================
+function copyContent(btn, id) {
+  const section = document.getElementById(id);
+  if (!section) return;
+
+  const text = section.innerText
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text)
+      .then(() => showCopied(btn))
+      .catch(() => fallbackCopy(text, btn));
+  } else {
+    fallbackCopy(text, btn);
+  }
+}
+
+function fallbackCopy(text, btn) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  ta.setSelectionRange(0, 99999);
+  try {
+    document.execCommand('copy');
+    showCopied(btn);
+  } catch (e) {
+    alert('কপি করা যায়নি');
+  }
+  document.body.removeChild(ta);
+}
+
+function showCopied(btn) {
+  const orig = btn.textContent;
+  btn.classList.add('copied');
+  btn.textContent = '✓ হয়েছে';
+  setTimeout(() => {
+    btn.classList.remove('copied');
+    btn.textContent = orig;
+  }, 1500);
+  showToast();
+}
+
+// ===================== TOAST =====================
+let toastTimer;
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1500);
+}
+</script>
+</body>
+  </html>
