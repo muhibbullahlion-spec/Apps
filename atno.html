@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a2332">
+<title>আত্মনিয়ন্ত্রণ বৃদ্ধি</title>
+<style>
+/* ===================== RESET ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a2332;
+  color: #e8edf3;
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* ===================== HEADER ===================== */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 16px 20px;
+  background: #1a2332;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.back-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #e8edf3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.back-btn:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===================== CONTAINER ===================== */
+.container {
+  padding: 0 16px 40px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ===================== INTRO ===================== */
+.intro {
+  padding: 4px 4px 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.intro-text {
+  font-size: 15.5px;
+  color: #cbd5e1;
+  line-height: 1.85;
+  text-align: justify;
+}
+
+.intro-text strong {
+  color: #a5b4fc;
+  font-weight: 600;
+}
+
+/* ===================== SECTION ===================== */
+.section {
+  margin-bottom: 22px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* ===================== COPY BUTTON ===================== */
+.copy-btn {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #a5b4fc;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.copy-btn:active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.copy-btn.copied {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+/* ===================== CARD ===================== */
+.card {
+  background: #212d3f;
+  border-radius: 12px;
+  padding: 18px 20px;
+  border-left: 3px solid #4f46e5;
+}
+
+.card p {
+  font-size: 15px;
+  color: #d1d9e6;
+  line-height: 1.9;
+  margin-bottom: 12px;
+  text-align: justify;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+.card strong {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+.card em {
+  color: #7dd3fc;
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* ===================== LIST ===================== */
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card ul li {
+  position: relative;
+  padding: 10px 0 10px 22px;
+  font-size: 15px;
+  color: #d1d9e6;
+  line-height: 1.85;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.card ul li:last-child {
+  border-bottom: none;
+}
+
+.card ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  color: #a5b4fc;
+  font-weight: 500;
+}
+
+.card ul li strong {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+/* ===================== QUOTE ===================== */
+.quote {
+  padding: 10px 0 10px 14px;
+  border-left: 2px solid #fbbf24;
+  margin: 14px 0;
+  font-size: 15px;
+  color: #fef3c7;
+  font-style: italic;
+  line-height: 1.85;
+}
+
+.quote-source {
+  display: block;
+  text-align: right;
+  font-size: 13px;
+  color: #94a3b8;
+  font-style: normal;
+  margin-top: 6px;
+}
+
+/* ===================== STEPS ===================== */
+.step {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.step:last-child {
+  border-bottom: none;
+}
+
+.step-number {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(165, 180, 252, 0.1);
+  border: 1px solid rgba(165, 180, 252, 0.3);
+  color: #a5b4fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.step-desc {
+  font-size: 14.5px;
+  color: #94a3b8;
+  line-height: 1.75;
+}
+
+/* ===================== HIGHLIGHT BOX ===================== */
+.highlight {
+  background: rgba(79, 70, 229, 0.08);
+  border: 1px solid rgba(79, 70, 229, 0.2);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin: 14px 0;
+}
+
+.highlight-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #a5b4fc;
+  margin-bottom: 8px;
+}
+
+.highlight-text {
+  font-size: 14.5px;
+  color: #cbd5e1;
+  line-height: 1.8;
+}
+
+/* ===================== TOAST ===================== */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #16a34a;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.3);
+  z-index: 2000;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===================== FOOTER ===================== */
+.footer-note {
+  text-align: center;
+  margin-top: 30px;
+  padding: 20px;
+  color: #64748b;
+  font-size: 13.5px;
+  line-height: 1.8;
+}
+
+.footer-note .heart {
+  color: #a5b4fc;
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="page-header">
+  <button class="back-btn" onclick="history.back()">🔙</button>
+  <h1 class="page-title">আত্মনিয়ন্ত্রণ বৃদ্ধি</h1>
+</header>
+
+<div class="container">
+
+  <!-- ===================== INTRO ===================== -->
+  <div class="intro">
+    <p class="intro-text">
+      আত্মনিয়ন্ত্রণ হলো নিজের ইচ্ছা, আবেগ ও চাহিদাকে নিয়ন্ত্রণ করার ক্ষমতা। যে ব্যক্তি নিজেকে নিয়ন্ত্রণ করতে পারে, সে <strong>জীবনের সব ক্ষেত্রে সফল</strong> হয় — দ্বীন, দুনিয়া, পরিবার, সমাজে।
+    </p>
+  </div>
+
+  <!-- ===================== SECTION ১: আত্মনিয়ন্ত্রণ কী ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🧠 আত্মনিয়ন্ত্রণ কী?</div>
+      <button class="copy-btn" onclick="copyContent(this, 'what')">কপি</button>
+    </div>
+
+    <div class="card" id="what">
+      <p>
+        আত্মনিয়ন্ত্রণ <em>(Self-Control)</em> বলতে বোঝায় — <strong>নিজের মনের কু-প্রবৃত্তি, আবেগ, রাগ, লোভ, কামনা ও আসক্তিকে ইচ্ছাশক্তি দিয়ে নিয়ন্ত্রণ করা।</strong>
+      </p>
+
+      <p>
+        আরবিতে একে বলা হয় <em>তাকওয়া</em> ও <em>নফস নিয়ন্ত্রণ</em>। ইসলামে আত্মনিয়ন্ত্রণকে সবচেয়ে গুরুত্বপূর্ণ ইবাদতের একটি বলা হয়েছে।
+      </p>
+
+      <div class="quote">
+        রাসূল (সা.) বলেছেন: <strong>"প্রকৃত শক্তিশালী সে নয়, যে কুস্তিতে অন্যকে হারায়। বরং প্রকৃত শক্তিশালী সে, যে রাগের সময় নিজেকে নিয়ন্ত্রণ করতে পারে।"</strong>
+        <span class="quote-source">— (সহীহ বুখারী, ৬১১৪)</span>
+      </div>
+
+      <p>
+        সহজভাবে বললে — <strong>যা করার ইচ্ছা হয়, তা সবসময় করা যায় না।</strong> আর যা করা উচিত, তা ইচ্ছা না থাকলেও করা — এটাই আত্মনিয়ন্ত্রণ।
+      </p>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION ২: কেন প্রয়োজন ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🎯 কেন প্রয়োজন?</div>
+      <button class="copy-btn" onclick="copyContent(this, 'why')">কপি</button>
+    </div>
+
+    <div class="card" id="why">
+      <ul>
+        <li><strong>জাহান্নাম থেকে বাঁচার জন্য</strong> — যে নিজের নফসকে নিয়ন্ত্রণ করে না, সে শয়তানের অনুসারী হয়।</li>
+        <li><strong>জান্নাতে যাওয়ার জন্য</strong> — আত্মনিয়ন্ত্রণ জান্নাতের চাবিকাঠি।</li>
+        <li><strong>দ্বীন ঠিক রাখার জন্য</strong> — নামাজ, রোজা, হালাল-হারাম সবই আত্মনিয়ন্ত্রণের উপর নির্ভরশীল।</li>
+        <li><strong>পারিবারিক শান্তির জন্য</strong> — রাগ ও লোভ নিয়ন্ত্রণ না করলে সংসার ভাঙে।</li>
+        <li><strong>সমাজে সম্মান পাওয়ার জন্য</strong> — যে নিজেকে সংযত রাখে, সবাই তাকে বিশ্বাস করে।</li>
+        <li><strong>শারীরিক ও মানসিক সুস্থতার জন্য</strong> — আসক্তি থেকে মুক্তি পায়, চিন্তা শক্তিশালী হয়।</li>
+        <li><strong>সফল হওয়ার জন্য</strong> — পড়াশোনা, চাকরি, ব্যবসা — সবখানে আত্মনিয়ন্ত্রণ দরকার।</li>
+        <li><strong>পাপ থেকে বাঁচার জন্য</strong> — হস্তমৈথুন, মাদক, মিথ্যা — সব আসক্তির মূল সমাধান আত্মনিয়ন্ত্রণ।</li>
+      </ul>
+
+      <div class="highlight">
+        <div class="highlight-title">⭐ সংক্ষেপে</div>
+        <div class="highlight-text">
+          আত্মনিয়ন্ত্রণ ছাড়া দ্বীন নেই, শান্তি নেই, সফলতা নেই। এটি হলো <strong>প্রতিটি ভালো কাজের ভিত্তি</strong>।
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION ৩: লক্ষণ ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">💡 দুর্বল আত্মনিয়ন্ত্রণের লক্ষণ</div>
+      <button class="copy-btn" onclick="copyContent(this, 'signs')">কপি</button>
+    </div>
+
+    <div class="card" id="signs">
+      <ul>
+        <li>সামান্য রাগেই মেজাজ হারিয়ে ফেলা</li>
+        <li>ইন্টারনেট, মোবাইল বা গেমের আসক্তি</li>
+        <li>পর্নোগ্রাফি বা অশ্লীল কনটেন্ট দেখা</li>
+        <li>হস্তমৈথুন বা অন্য যেকোনো আসক্তি</li>
+        <li>নামাজে মনোযোগ না থাকা</li>
+        <li>পড়াশোনায় মন না বসা</li>
+        <li>খারাপ বন্ধুদের প্ররোচনায় পড়া</li>
+        <li>"একবার শেষবার" বলে বারবার পাপ করা</li>
+        <li>সিদ্ধান্ত নিলেও তা না রাখা</li>
+        <li>ছোট বিষয়ে অসন্তুষ্ট থাকা</li>
+      </ul>
+
+      <p style="margin-top: 14px; font-size: 14.5px; color: #94a3b8;">
+        <strong style="color: #fbbf24;">লক্ষ্য করুন:</strong> এই লক্ষণগুলো থাকলে বুঝবেন — আপনার আত্মনিয়ন্ত্রণ আরো শক্তিশালী করা দরকার।
+      </p>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION ৪: ১০ উপায় ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🪜 আত্মনিয়ন্ত্রণ বাড়ানোর ১০ উপায়</div>
+      <button class="copy-btn" onclick="copyContent(this, 'how')">কপি</button>
+    </div>
+
+    <div class="card" id="how">
+
+      <div class="step">
+        <div class="step-number">১</div>
+        <div class="step-content">
+          <div class="step-title">নিয়মিত নামাজ ও যিকির</div>
+          <div class="step-desc">৫ ওয়াক্ত নামাজ ঠিকভাবে পড়ুন। সব সময় আল্লাহর স্মরণে থাকুন। নামাজ-যিকিরই প্রথম ঢাল।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">২</div>
+        <div class="step-content">
+          <div class="step-title">দৃষ্টি সংযত রাখা</div>
+          <div class="step-desc">অশ্লীল দৃশ্য, ছবি, ভিডিও, সাইট — সব বন্ধ করুন। দৃষ্টিই কামনার দরজা।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">৩</div>
+        <div class="step-content">
+          <div class="step-title">সাপ্তাহিক রোজা</div>
+          <div class="step-desc">প্রতি সপ্তাহে অন্তত ২ দিন রোজা। রোজা আত্মনিয়ন্ত্রণের শ্রেষ্ঠ শিক্ষা।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">৪</div>
+        <div class="step-content">
+          <div class="step-title">একা থাকা কমানো</div>
+          <div class="step-desc">একা থাকলেই খারাপ চিন্তা আসে। পরিবার বা বন্ধুদের সাথে সময় কাটান।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">৫</div>
+        <div class="step-content">
+          <div class="step-title">মোবাইল নিয়ন্ত্রণ</div>
+          <div class="step-desc">রাতে মোবাইল দূরে রাখুন। সোশ্যাল মিডিয়া লিমিট করুন। Screen Time ব্যবহার করুন।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">৬</div>
+        <div class="step-content">
+          <div class="step-title">শরীরচর্চা ও খেলাধুলা</div>
+          <div class="step-desc">প্রতিদিন ৩০ মিনিট শরীরচর্চা। শরীর ব্যস্ত থাকলে মন ব্যস্ত থাকে।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">৭</div>
+        <div class="step-content">
+          <div class="step-title">ইলম অর্জন</div>
+          <div class="step-desc">ইসলামিক বই পড়ুন, হাদিস শুনুন, দ্বীন শিখুন। জ্ঞান হৃদয় শক্তিশালী করে।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">৮</div>
+        <div class="step-content">
+          <div class="step-title">সঙ্গদোষ ত্যাগ</div>
+          <div class="step-desc">খারাপ বন্ধুদের থেকে দূরে সরে যান। ভালো সঙ্গই ভালো কাজের প্রেরণা।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">৯</div>
+        <div class="step-content">
+          <div class="step-title">দোয়া ও কান্নাকাটি</div>
+          <div class="step-desc">আল্লাহর কাছে সাহায্য চান। একান্তে কেঁদে ফেলুন। আল্লাহ মুক্তিদাতা।</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">১০</div>
+        <div class="step-content">
+          <div class="step-title">সামর্থ্য থাকলে বিয়ে</div>
+          <div class="step-desc">রাসূল (সা.) বলেছেন — বিয়ে হলো আত্মনিয়ন্ত্রণের সবচেয়ে বড় সহায়ক।</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== SECTION ৫: অনুশীলন ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🎯 প্রতিদিনের অনুশীলন</div>
+      <button class="copy-btn" onclick="copyContent(this, 'practice')">কপি</button>
+    </div>
+
+    <div class="card" id="practice">
+      <ul>
+        <li><strong>সকালে:</strong> ফজর পড়ে ৫ মিনিট যিকির — "সুবহানাল্লাহ, আলহামদুলিল্লাহ, আল্লাহু আকবার"</li>
+        <li><strong>দুপুরে:</strong> ৫ মিনিট চোখ বন্ধ করে নিজের শ্বাস নিয়ন্ত্রণ করুন</li>
+        <li><strong>বিকেলে:</strong> ৩০ মিনিট শরীরচর্চা বা হাঁটা</li>
+        <li><strong>সন্ধ্যায়:</strong> ১০ মিনিট কুরআন পড়া</li>
+        <li><strong>রাতে:</strong> ৫ মিনিট নিজের দিনের হিসাব — কী ভালো করেছি, কী খারাপ করেছি</li>
+        <li><strong>ঘুমানোর আগে:</strong> ৫ মিনিট দোয়া ও আল্লাহর কাছে সাহায্য চাওয়া</li>
+      </ul>
+
+      <div class="highlight" style="margin-top: 14px;">
+        <div class="highlight-title">⭐ ৩০ দিনের চ্যালেঞ্জ</div>
+        <div class="highlight-text">
+          এই ৬টি কাজ <strong>৩০ দিন</strong> নিয়মিত করুন। ৩০ দিন পর নিজের মধ্যে পরিবর্তন দেখতে পাবেন ইনশাআল্লাহ।
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION ৬: হাদিস ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">📖 হাদিস থেকে শিক্ষা</div>
+      <button class="copy-btn" onclick="copyContent(this, 'hadith')">কপি</button>
+    </div>
+
+    <div class="card" id="hadith">
+      <div class="quote">
+        রাসূল (সা.) বলেছেন: <strong>"প্রকৃত শক্তিশালী সে নয় যে কুস্তিতে জেতে। প্রকৃত শক্তিশালী সে — যে রাগের সময় নিজেকে নিয়ন্ত্রণ করতে পারে।"</strong>
+        <span class="quote-source">— (সহীহ বুখারী, ৬১১৪)</span>
+      </div>
+
+      <div class="quote" style="margin-top: 14px;">
+        রাসূল (সা.) বলেছেন: <strong>"তোমাদের মধ্যে সর্বোত্তম ব্যক্তি সে, যে নিজের নফসকে নিয়ন্ত্রণ করতে পারে এবং মৃত্যুর পর উত্তম কাজের প্রস্তুতি নেয়।"</strong>
+        <span class="quote-source">— (তিরমিযী)</span>
+      </div>
+
+      <div class="quote" style="margin-top: 14px;">
+        আল্লাহ তা'আলা বলেন: <strong>"আর যে নিজের নফসের লোভ থেকে রক্ষা পেয়েছে, নিশ্চয়ই সেই সফলকাম।"</strong>
+        <span class="quote-source">— (আল-কুরআন, ৫৯:৯)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION ৭: উপসংহার ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">✨ উপসংহার</div>
+      <button class="copy-btn" onclick="copyContent(this, 'conclusion')">কপি</button>
+    </div>
+
+    <div class="card" id="conclusion">
+      <p>
+        আত্মনিয়ন্ত্রণ একদিনে অর্জিত হয় না। এটি <strong>দীর্ঘ প্রচেষ্টা, ইবাদত এবং আল্লাহর সাহায্যের</strong> ফল।
+      </p>
+      <p>
+        আপনার প্রতিটি ছোট সংযম — একটি রাগ চেপে রাখা, একটি হারাম দৃষ্টি নামানো, একটি অশ্লীল সাইট বন্ধ করা — এগুলোই আপনার <strong>আত্মনিয়ন্ত্রণের ভিত্তি তৈরি করছে</strong>।
+      </p>
+      <p>
+        মনে রাখবেন — আপনি যতবার পড়ে যান, আল্লাহ ততবার আপনাকে উঠতে সাহায্য করতে প্রস্তুত। শুধু <strong>হাল ছাড়বেন না</strong>।
+      </p>
+    </div>
+  </div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <div class="footer-note">
+    <p>আল্লাহ আমাদের সবাইকে শক্তিশালী আত্মনিয়ন্ত্রণ দান করুন আমিন <span class="heart">🤲</span></p>
+  </div>
+
+</div>
+
+<!-- ===================== TOAST ===================== -->
+<div class="toast" id="toast">কপি হয়েছে</div>
+
+<script>
+// ===================== COPY =====================
+function copyContent(btn, id) {
+  const section = document.getElementById(id);
+  if (!section) return;
+
+  const text = section.innerText
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text)
+      .then(() => showCopied(btn))
+      .catch(() => fallbackCopy(text, btn));
+  } else {
+    fallbackCopy(text, btn);
+  }
+}
+
+function fallbackCopy(text, btn) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  ta.setSelectionRange(0, 99999);
+  try {
+    document.execCommand('copy');
+    showCopied(btn);
+  } catch (e) {
+    alert('কপি করা যায়নি');
+  }
+  document.body.removeChild(ta);
+}
+
+function showCopied(btn) {
+  const orig = btn.textContent;
+  btn.classList.add('copied');
+  btn.textContent = '✓ হয়েছে';
+  setTimeout(() => {
+    btn.classList.remove('copied');
+    btn.textContent = orig;
+  }, 1500);
+  showToast();
+}
+
+// ===================== TOAST =====================
+let toastTimer;
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1500);
+}
+</script>
+</body>
+</html>
