@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a2332">
+<title>My Rank</title>
+<style>
+/* ===================== RESET ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a2332;
+  color: #e8edf3;
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ===================== HEADER ===================== */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 16px 20px;
+  background: #1a2332;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.back-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #e8edf3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.back-btn:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  flex: 1;
+}
+
+/* ===================== CONTAINER ===================== */
+.container {
+  padding: 0 16px 40px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ===================== CURRENT RANK CARD ===================== */
+.current-rank-card {
+  background: linear-gradient(135deg, #2a1f3d 0%, #212d3f 100%);
+  border-radius: 18px;
+  padding: 28px 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.current-rank-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.rank-icon {
+  font-size: 60px;
+  margin-bottom: 10px;
+  display: inline-block;
+  animation: rankFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.4));
+}
+
+@keyframes rankFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.rank-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fbbf24;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.rank-name {
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: -0.3px;
+}
+
+.rank-desc {
+  font-size: 13.5px;
+  color: #94a3b8;
+  margin-bottom: 16px;
+  padding: 0 10px;
+}
+
+.rank-days {
+  display: inline-block;
+  padding: 10px 22px;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 24px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fbbf24;
+}
+
+/* ===================== PROGRESS BAR ===================== */
+.progress-section {
+  background: #212d3f;
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.progress-label {
+  color: #94a3b8;
+}
+
+.progress-next {
+  color: #a5b4fc;
+  font-weight: 600;
+}
+
+.progress-bar-large {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-fill-large {
+  height: 100%;
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  border-radius: 5px;
+  transition: width 0.6s ease;
+}
+
+.progress-remaining {
+  font-size: 13px;
+  color: #94a3b8;
+  text-align: center;
+}
+
+.progress-remaining strong {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+/* ===================== LEADERBOARD ===================== */
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin: 24px 4px 10px;
+}
+
+.rank-list {
+  background: #212d3f;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rank-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: background 0.2s;
+}
+
+.rank-row:last-child {
+  border-bottom: none;
+}
+
+.rank-row.current {
+  background: rgba(79, 70, 229, 0.1);
+  border-left: 3px solid #4f46e5;
+}
+
+.rank-row.locked {
+  opacity: 0.5;
+}
+
+.rank-row-icon {
+  font-size: 24px;
+  width: 32px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.rank-row-info {
+  flex: 1;
+}
+
+.rank-row-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.rank-row-days {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.rank-row-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+  flex-shrink: 0;
+}
+
+.rank-row.locked .rank-row-badge {
+  background: rgba(255, 255, 255, 0.05);
+  color: #64748b;
+}
+
+.rank-row.current .rank-row-badge {
+  background: rgba(79, 70, 229, 0.2);
+  color: #a5b4fc;
+}
+
+/* ===================== STATS MINI ===================== */
+.stats-mini {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.stat-mini {
+  background: #212d3f;
+  border-radius: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-mini-label {
+  font-size: 11.5px;
+  color: #64748b;
+  margin-bottom: 4px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.stat-mini-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.stat-mini-value.gold {
+  color: #fbbf24;
+}
+
+/* ===================== FOOTER NOTE ===================== */
+.footer-note {
+  text-align: center;
+  margin-top: 26px;
+  padding: 16px;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="page-header">
+  <button class="back-btn" onclick="history.back()">🔙</button>
+  <h1 class="page-title">My Rank</h1>
+</header>
+
+<div class="container">
+
+  <!-- ===================== CURRENT RANK ===================== -->
+  <div class="current-rank-card">
+    <div class="rank-icon" id="currentIcon">🌱</div>
+    <div class="rank-label">আপনার বর্তমান র‍্যাংক</div>
+    <div class="rank-name" id="currentRankName">নতুন শুরু</div>
+    <div class="rank-desc" id="currentRankDesc">প্রথম পদক্ষেপ নিয়েছেন</div>
+    <div class="rank-days" id="currentDays">০ দিন</div>
+  </div>
+
+  <!-- ===================== MINI STATS ===================== -->
+  <div class="stats-mini">
+    <div class="stat-mini">
+      <div class="stat-mini-label">সর্বোচ্চ স্ট্রিক</div>
+      <div class="stat-mini-value gold" id="bestStreak">০ দিন</div>
+    </div>
+    <div class="stat-mini">
+      <div class="stat-mini-label">বর্তমান স্ট্রিক</div>
+      <div class="stat-mini-value" id="currentStreak">০ দিন</div>
+    </div>
+  </div>
+
+  <!-- ===================== PROGRESS ===================== -->
+  <div class="progress-section">
+    <div class="progress-header">
+      <span class="progress-label">পরবর্তী র‍্যাংক</span>
+      <span class="progress-next" id="nextRankName">সংগ্রামী</span>
+    </div>
+    <div class="progress-bar-large">
+      <div class="progress-fill-large" id="progressFill" style="width: 0%;"></div>
+    </div>
+    <div class="progress-remaining" id="progressRemaining">
+      আরো <strong>৩ দিন</strong> বাকি
+    </div>
+  </div>
+
+  <!-- ===================== RANK LIST ===================== -->
+  <div class="section-title">🏆 সব র‍্যাংক</div>
+  <div class="rank-list" id="rankList"></div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <div class="footer-note">
+    যত বেশি সময় পাপ থেকে দূরে থাকবেন, তত উঁচু র‍্যাংকে পৌঁছাবেন। আল্লাহ আপনার চেষ্টা কবুল করুন।
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+//                  RANKS DATA
+// ============================================================
+
+const RANKS = [
+  {
+    days: 0,
+    name: 'নতুন শুরু',
+    icon: '🌱',
+    desc: 'প্রথম পদক্ষেপ নিয়েছেন'
+  },
+  {
+    days: 3,
+    name: 'সংগ্রামী',
+    icon: '⚔️',
+    desc: 'লড়াই শুরু হয়েছে'
+  },
+  {
+    days: 7,
+    name: 'একাগ্র',
+    icon: '🎯',
+    desc: 'মনোযোগ বাড়ছে'
+  },
+  {
+    days: 14,
+    name: 'ধৈর্যশীল',
+    icon: '🛡️',
+    desc: 'ধৈর্য ধরে এগোচ্ছেন'
+  },
+  {
+    days: 21,
+    name: 'অভ্যাসগত',
+    icon: '🔄',
+    desc: 'নতুন অভ্যাস গড়ছেন'
+  },
+  {
+    days: 30,
+    name: 'বিজয়ী',
+    icon: '🏅',
+    desc: 'এক মাস পূর্ণ করেছেন'
+  },
+  {
+    days: 60,
+    name: 'দৃঢ়প্রতিজ্ঞ',
+    icon: '💪',
+    desc: 'দৃঢ় সংকল্প প্রমাণিত'
+  },
+  {
+    days: 90,
+    name: 'বীর',
+    icon: '🏆',
+    desc: '৯০ দিনের অর্জন'
+  },
+  {
+    days: 180,
+    name: 'মহাবীর',
+    icon: '👑',
+    desc: 'ছয় মাসের যোদ্ধা'
+  },
+  {
+    days: 360,
+    name: 'সোনালী মানুষ',
+    icon: '🌟',
+    desc: 'এক বছর পূর্ণ করেছেন'
+  }
+];
+
+// ============================================================
+//                  HELPERS
+// ============================================================
+
+function toBangla(num) {
+  const bn = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+  return String(num).replace(/\d/g, d => bn[d]);
+}
+
+function getCurrentDays() {
+  const savedSeconds = parseInt(localStorage.getItem('currentTimerSeconds') || '0');
+  return Math.floor(savedSeconds / 86400);
+}
+
+function getBestDays() {
+  const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+  if (reports.length === 0) return 0;
+  return Math.max(...reports.map(r => Math.floor((r.seconds || 0) / 86400)));
+}
+
+// ============================================================
+//                  RENDER
+// ============================================================
+
+function renderRank() {
+  const currentDays = getCurrentDays();
+  const bestDays = getBestDays();
+  const effectiveDays = Math.max(currentDays, bestDays);
+
+  // বর্তমান র‍্যাংক খুঁজি
+  let currentRank = RANKS[0];
+  let nextRank = RANKS[1];
+
+  for (let i = 0; i < RANKS.length; i++) {
+    if (effectiveDays >= RANKS[i].days) {
+      currentRank = RANKS[i];
+      nextRank = RANKS[i + 1] || null;
+    } else {
+      break;
+    }
+  }
+
+  // UI আপডেট
+  document.getElementById('currentIcon').textContent = currentRank.icon;
+  document.getElementById('currentRankName').textContent = currentRank.name;
+  document.getElementById('currentRankDesc').textContent = currentRank.desc;
+  document.getElementById('currentDays').textContent = toBangla(currentDays) + ' দিন';
+
+  document.getElementById('bestStreak').textContent = toBangla(bestDays) + ' দিন';
+  document.getElementById('currentStreak').textContent = toBangla(currentDays) + ' দিন';
+
+  // Progress
+  if (nextRank) {
+    const totalGap = nextRank.days - currentRank.days;
+    const passed = effectiveDays - currentRank.days;
+    const percent = Math.min(100, Math.max(0, (passed / totalGap) * 100));
+    const remaining = Math.max(0, nextRank.days - effectiveDays);
+
+    document.getElementById('nextRankName').textContent = nextRank.name;
+    document.getElementById('progressFill').style.width = percent + '%';
+    document.getElementById('progressRemaining').innerHTML =
+      `আরো <strong>${toBangla(remaining)} দিন</strong> বাকি`;
+  } else {
+    // সর্বোচ্চ র‍্যাংক অর্জিত
+    document.getElementById('nextRankName').textContent = 'সর্বোচ্চ!';
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('progressRemaining').innerHTML =
+      '🎉 আপনি সর্বোচ্চ র‍্যাংকে পৌঁছেছেন!';
+  }
+
+  // RANK LIST
+  const list = document.getElementById('rankList');
+  list.innerHTML = RANKS.map(r => {
+    const isCurrent = r.days === currentRank.days;
+    const isLocked = effectiveDays < r.days;
+    const achieved = effectiveDays >= r.days;
+
+    return `
+      <div class="rank-row ${isCurrent ? 'current' : ''} ${isLocked ? 'locked' : ''}">
+        <div class="rank-row-icon">${r.icon}</div>
+        <div class="rank-row-info">
+          <div class="rank-row-name">${r.name}</div>
+          <div class="rank-row-days">${toBangla(r.days)} দিন</div>
+        </div>
+        <div class="rank-row-badge">
+          ${achieved ? '✓' : '🔒'}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ============================================================
+//                  INIT
+// ============================================================
+
+renderRank();
+</script>
+</body>
+  </html>
