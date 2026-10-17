@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a2332">
+<title>Profile</title>
+<style>
+/* ===================== RESET ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a2332;
+  color: #e8edf3;
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ===================== HEADER ===================== */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 16px 20px;
+  background: #1a2332;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.back-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #e8edf3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.back-btn:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  flex: 1;
+}
+
+/* ===================== CONTAINER ===================== */
+.container {
+  padding: 0 16px 40px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ===================== PROFILE CARD ===================== */
+.profile-card {
+  background: #212d3f;
+  border-radius: 16px;
+  padding: 28px 20px 22px;
+  text-align: center;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.profile-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  font-size: 40px;
+  color: #ffffff;
+  border: 3px solid #1a2332;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+  overflow: hidden;
+}
+
+.profile-name {
+  font-size: 19px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.profile-email {
+  font-size: 13.5px;
+  color: #94a3b8;
+}
+
+/* ===================== INFO SECTION ===================== */
+.info-section {
+  background: #212d3f;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14.5px;
+  color: #cbd5e1;
+}
+
+.info-icon {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+}
+
+.info-value {
+  font-size: 14.5px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.info-value.muted {
+  color: #64748b;
+  font-weight: 400;
+  font-size: 13.5px;
+}
+
+/* ===================== SECTION TITLE ===================== */
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin: 20px 4px 10px;
+}
+
+/* ===================== NOTE ===================== */
+.note {
+  background: rgba(251, 191, 36, 0.06);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin-top: 16px;
+}
+
+.note-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #fbbf24;
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="page-header">
+  <button class="back-btn" onclick="history.back()">🔙</button>
+  <h1 class="page-title">Profile</h1>
+</header>
+
+<div class="container">
+
+  <!-- ===================== PROFILE CARD ===================== -->
+  <div class="profile-card">
+    <div class="profile-avatar">👤</div>
+    <div class="profile-name">User</div>
+    <div class="profile-email">Your data</div>
+  </div>
+
+  <!-- ===================== STATISTICS ===================== -->
+  <div class="section-title">📊 আপনার পরিসংখ্যান</div>
+
+  <div class="info-section">
+    <div class="info-row">
+      <div class="info-label">
+        <span class="info-icon">⏱️</span>
+        <span>বর্তমান স্ট্রিক</span>
+      </div>
+      <span class="info-value" id="statStreak">০ দিন</span>
+    </div>
+
+    <div class="info-row">
+      <div class="info-label">
+        <span class="info-icon">📝</span>
+        <span>মোট রিপোর্ট</span>
+      </div>
+      <span class="info-value" id="statReports">০</span>
+    </div>
+
+    <div class="info-row">
+      <div class="info-label">
+        <span class="info-icon">🏆</span>
+        <span>সর্বোচ্চ স্ট্রিক</span>
+      </div>
+      <span class="info-value" id="statBest">০ দিন</span>
+    </div>
+
+    <div class="info-row">
+      <div class="info-label">
+        <span class="info-icon">📅</span>
+        <span>অ্যাপ ব্যবহার শুরু</span>
+      </div>
+      <span class="info-value muted" id="statJoined">আজ</span>
+    </div>
+  </div>
+
+  <!-- ===================== ACCOUNT INFO ===================== -->
+  <div class="section-title">📱 ডিভাইস তথ্য</div>
+
+  <div class="info-section">
+    <div class="info-row">
+      <div class="info-label">
+        <span class="info-icon">📱</span>
+        <span>ডিভাইস</span>
+      </div>
+      <span class="info-value muted" id="accDevice">—</span>
+    </div>
+    <div class="info-row">
+      <div class="info-label">
+        <span class="info-icon">🔒</span>
+        <span>ডেটা সংরক্ষণ</span>
+      </div>
+      <span class="info-value muted">শুধু আপনার ফোনে</span>
+    </div>
+  </div>
+
+  <!-- ===================== NOTE ===================== -->
+  <div class="note">
+    <div class="note-title">ℹ️ Info</div>
+     <strong>ᵃˡˡ ʸᵒᵘʳ ᵈᵃᵗᵃ ⁽ˢᵗʳᵉᵃᵏˢ, ʳᵉᵖᵒʳᵗˢ, ⁿᵒᵗᵉˢ⁾ ⁱˢ ˢᵃᵛᵉᵈ ᵉⁿᵗⁱʳᵉˡʸ ᵒⁿ ʸᵒᵘʳ ᵖʰᵒⁿᵉ. ⁱᵗ ᵈᵒᵉˢ ⁿᵒᵗ ᵍᵒ ᵗᵒ ᵃⁿʸ ˢᵉʳᵛᵉʳ. ᵘⁿⁱⁿˢᵗᵃˡˡⁱⁿᵍ ᵗʰᵉ ᵃᵖᵖ ʷⁱˡˡ ᵈᵉˡᵉᵗᵉ ᵗʰᵉ ᵈᵃᵗᵃ.</strong>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+//                  HELPERS
+// ============================================================
+
+function toBangla(num) {
+  const bn = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+  return String(num).replace(/\d/g, d => bn[d]);
+}
+
+// ============================================================
+//                  STATS RENDER
+// ============================================================
+
+function renderStats() {
+  const savedSeconds = parseInt(localStorage.getItem('currentTimerSeconds') || '0');
+  const days = Math.floor(savedSeconds / 86400);
+  document.getElementById('statStreak').textContent = toBangla(days) + ' দিন';
+
+  const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+  document.getElementById('statReports').textContent = toBangla(reports.length);
+
+  let best = 0;
+  if (reports.length > 0) {
+    best = Math.max(...reports.map(r => Math.floor((r.seconds || 0) / 86400)));
+  }
+  document.getElementById('statBest').textContent = toBangla(best) + ' দিন';
+
+  const joined = localStorage.getItem('firstOpenDate');
+  if (!joined) {
+    localStorage.setItem('firstOpenDate', new Date().toISOString());
+    document.getElementById('statJoined').textContent = 'আজ';
+  } else {
+    const d = new Date(joined);
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    document.getElementById('statJoined').textContent =
+      `${toBangla(day)}/${toBangla(month)}/${toBangla(year)}`;
+  }
+
+  const ua = navigator.userAgent;
+  let device = 'মোবাইল';
+  if (/Android/i.test(ua)) device = 'Android';
+  else if (/iPhone|iPad|iPod/i.test(ua)) device = 'iOS';
+  else if (/Windows/i.test(ua)) device = 'Windows';
+  else if (/Mac/i.test(ua)) device = 'Mac';
+  document.getElementById('accDevice').textContent = device;
+}
+
+// ============================================================
+//                  INIT
+// ============================================================
+
+renderStats();
+</script>
+</body>
+  </html>
