@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a2332">
+<title>গোপন গোনাহের ক্ষতিকর দিক</title>
+<style>
+/* ===================== RESET ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a2332;
+  color: #e8edf3;
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ===================== HEADER ===================== */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 16px 20px;
+  background: #1a2332;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.back-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #e8edf3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.back-btn:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===================== CONTAINER ===================== */
+.container {
+  padding: 0 16px 40px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ===================== SECTION ===================== */
+.section {
+  margin-bottom: 22px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* ===================== COPY BUTTON ===================== */
+.copy-btn {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #a5b4fc;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.copy-btn:active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.copy-btn.copied {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+/* ===================== CARD ===================== */
+.card {
+  background: #212d3f;
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+
+.card p {
+  font-size: 15px;
+  color: #d1d9e6;
+  line-height: 1.85;
+  margin-bottom: 12px;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+.card strong {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+/* ===================== QUOTE ===================== */
+.quote {
+  padding: 10px 0 10px 14px;
+  border-left: 2px solid #fbbf24;
+  margin: 12px 0;
+  font-size: 15px;
+  color: #fef3c7;
+  font-style: italic;
+  line-height: 1.8;
+}
+
+.quote-source {
+  display: block;
+  text-align: right;
+  font-size: 13px;
+  color: #94a3b8;
+  font-style: normal;
+  margin-top: 6px;
+}
+
+/* ===================== LIST ===================== */
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card ul li {
+  position: relative;
+  padding: 8px 0 8px 22px;
+  font-size: 15px;
+  color: #d1d9e6;
+  line-height: 1.8;
+}
+
+.card ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.card ul li strong {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+/* ===================== TOAST ===================== */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #16a34a;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.3);
+  z-index: 2000;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===================== FOOTER ===================== */
+.footer-note {
+  text-align: center;
+  margin-top: 30px;
+  padding: 16px;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="page-header">
+  <button class="back-btn" onclick="history.back()">🔙</button>
+  <h1 class="page-title">গোপন গোনাহের ক্ষতিকর দিক</h1>
+</header>
+
+<div class="container">
+
+  <!-- ===================== SECTION ১ ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">📖 ইসলামিক দৃষ্টিকোণ</div>
+      <button class="copy-btn" onclick="copyContent(this, 'islamic')">কপি</button>
+    </div>
+
+    <div class="card" id="islamic">
+      <p>ইসলামে হস্তমৈথুন একটি <strong>ঘৃণিত ও নিষিদ্ধ কাজ</strong>। আল-কুরআনে আল্লাহ তা'আলা বলেন:</p>
+
+      <div class="quote">
+        "নিশ্চয়ই সফলকাম হয়েছে মুমিনগণ... যারা নিজেদের লজ্জাস্থান হেফাযত করে। তবে নিজেদের স্ত্রী ও মালিকানাধীন দাসীদের ক্ষেত্রে (এটি নিষিদ্ধ নয়)। নিশ্চয়ই এদের বাইরে যারা চায়, তারাই সীমালঙ্ঘনকারী।"
+        <span class="quote-source">— (আল-কুরআন, ২৩:১-৭)</span>
+      </div>
+
+      <p>এই আয়াতে স্পষ্টভাবে বলা হয়েছে — <strong>স্ত্রী ও মালিকানাধীন দাসী</strong> ছাড়া অন্য কোনো উপায়ে যৌন চাহিদা মেটানো সীমালঙ্ঘন। হস্তমৈথুন এর আওতায় পড়ে।</p>
+
+      <p>রাসূল (সা.) বলেছেন: <strong>"হে যুবকগণ! তোমাদের মধ্যে যার সামর্থ্য আছে সে যেন বিয়ে করে ফেলে। কারণ এটা দৃষ্টি সংযত রাখে ও লজ্জাস্থান হেফাযত করে। আর যার সামর্থ্য নেই সে যেন রোজা রাখে।"</strong></p>
+      <p class="quote-source">— (সহীহ বুখারী, ১৯০৫)</p>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION ২ ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">💪 শারীরিক ক্ষতি</div>
+      <button class="copy-btn" onclick="copyContent(this, 'physical')">কপি</button>
+    </div>
+
+    <div class="card" id="physical">
+      <ul>
+        <li><strong>দুর্বলতা ও ক্লান্তি</strong> — শরীরে স্থায়ী দুর্বলতা তৈরি হয়।</li>
+        <li><strong>মস্তিষ্কের ক্ষতি</strong> — স্মৃতিশক্তি কমে যায়, মনোযোগ নষ্ট হয়।</li>
+        <li><strong>হরমোনের ভারসাম্যহীনতা</strong> — টেস্টোস্টেরন কমে যায়।</li>
+        <li><strong>চুল পড়া</strong> — দীর্ঘদিনের অভ্যাসে চুল পড়ে যেতে পারে।</li>
+        <li><strong>চোখের সমস্যা</strong> — দৃষ্টিশক্তি দুর্বল হয়।</li>
+        <li><strong>কমর ও পিঠে ব্যথা</strong> — নার্ভের সমস্যা তৈরি হয়।</li>
+        <li><strong>যৌন অক্ষমতা</strong> — ভবিষ্যতে দাম্পত্য সম্পর্ক নষ্ট হয়।</li>
+        <li><strong>অকাল বার্ধক্য</strong> — তাড়াতাড়ি বুড়িয়ে যাওয়া।</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION ৩ ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🧠 মানসিক ক্ষতি</div>
+      <button class="copy-btn" onclick="copyContent(this, 'mental')">কপি</button>
+    </div>
+
+    <div class="card" id="mental">
+      <ul>
+        <li><strong>অত্যধিক লজ্জা ও অপরাধবোধ</strong> — নিজেকে ঘৃণা করতে শুরু করেন।</li>
+        <li><strong>বিষণ্নতা (Depression)</strong> — ধীরে ধীরে গভীর বিষণ্নতায় পড়েন।</li>
+        <li><strong>দুশ্চিন্তা ও উদ্বেগ</strong> — সব সময় অস্থির লাগে।</li>
+        <li><strong>আত্মবিশ্বাস হ্রাস</strong> — নিজের উপর ভরসা হারান।</li>
+        <li><strong>পর্নোগ্রাফির আসক্তি</strong> — সহজে আসক্ত হয়ে পড়েন।</li>
+        <li><strong>একাকীত্ব</strong> — সমাজ থেকে দূরে সরে যান।</li>
+        <li><strong>আত্মহত্যার চিন্তা</strong> — চরম পর্যায়ে পৌঁছে যেতে পারে।</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION ৪ ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🕌 আধ্যাত্মিক ক্ষতি</div>
+      <button class="copy-btn" onclick="copyContent(this, 'spiritual')">কপি</button>
+    </div>
+
+    <div class="card" id="spiritual">
+      <ul>
+        <li><strong>ইবাদতে অলসতা</strong> — নামাজ, রোজা, কুরআন পড়ায় মন বসে না।</li>
+        <li><strong>দুআ কবুল না হওয়া</strong> — দোয়া করলেও কবুল হয় না।</li>
+        <li><strong>হৃদয় কঠিন হয়ে যাওয়া</strong> — আল্লাহর যিকিরে আরাম পায় না।</li>
+        <li><strong>ঈমান দুর্বল হয়ে যাওয়া</strong> — ধীরে ধীরে দ্বীন থেকে দূরে সরে যান।</li>
+        <li><strong>সৎকাজে বাধা</strong> — ভালো কাজ করতে মন চায় না।</li>
+        <li><strong>রিজিক কমে যাওয়া</strong> — বরকত হ্রাস পায়।</li>
+        <li><strong>মৃত্যুর কষ্ট</strong> — শেষ সময়ে কঠিন হয়ে যায়।</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION ৫ ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">👥 সামাজিক ক্ষতি</div>
+      <button class="copy-btn" onclick="copyContent(this, 'social')">কপি</button>
+    </div>
+
+    <div class="card" id="social">
+      <ul>
+        <li><strong>পারিবারিক সম্পর্ক নষ্ট</strong> — পরিবারের সাথে দূরত্ব তৈরি হয়।</li>
+        <li><strong>বন্ধুদের এড়িয়ে চলা</strong> — সামাজিক বিচ্ছিন্নতা।</li>
+        <li><strong>বিয়েতে অনীহা</strong> — বিয়ে করতে ভয় পান।</li>
+        <li><strong>স্ত্রীর সাথে দুর্বল সম্পর্ক</strong> — দাম্পত্য জীবনে অশান্তি।</li>
+        <li><strong>সন্তানদের উপর প্রভাব</strong> — ভবিষ্যতে খারাপ প্রভাব।</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== SECTION ৬ ===================== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">🕊️ মুক্তির উপায়</div>
+      <button class="copy-btn" onclick="copyContent(this, 'freedom')">কপি</button>
+    </div>
+
+    <div class="card" id="freedom">
+      <ul>
+        <li><strong>তাওবা করা</strong> — আন্তরিকভাবে আল্লাহর কাছে ক্ষমা চাওয়া।</li>
+        <li><strong>পর্নোগ্রাফি বন্ধ</strong> — সব অশ্লীল কনটেন্ট বর্জন।</li>
+        <li><strong>সঙ্গদোষ পরিহার</strong> — খারাপ বন্ধুদের এড়িয়ে চলা।</li>
+        <li><strong>সহীহ ইলম অর্জন</strong> — ইসলামিক জ্ঞান বাড়ানো।</li>
+        <li><strong>নিয়মিত নামাজ</strong> — ৫ ওয়াক্ত নামাজ সময়মতো পড়া।</li>
+        <li><strong>রোজা রাখা</strong> — সপ্তাহে অন্তত ২ দিন।</li>
+        <li><strong>শরীরচর্চা</strong> — শরীরকে ব্যস্ত রাখা।</li>
+        <li><strong>দ্রুত বিয়ে করা</strong> — সামর্থ্য থাকলে বিয়ে।</li>
+        <li><strong>ব্যস্ত থাকা</strong> — ফাঁকা সময় না রাখা।</li>
+        <li><strong>দোয়া করা</strong> — আল্লাহর সাহায্য চাওয়া।</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <div class="footer-note">
+    আল্লাহ আমাদের সবাইকে এই গোনাহ থেকে হেফাযত করুন। আমিন।
+  </div>
+
+</div>
+
+<!-- ===================== TOAST ===================== -->
+<div class="toast" id="toast">কপি হয়েছে</div>
+
+<script>
+// ===================== COPY =====================
+function copyContent(btn, id) {
+  const section = document.getElementById(id);
+  if (!section) return;
+
+  const text = section.innerText
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text)
+      .then(() => showCopied(btn))
+      .catch(() => fallbackCopy(text, btn));
+  } else {
+    fallbackCopy(text, btn);
+  }
+}
+
+function fallbackCopy(text, btn) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  ta.setSelectionRange(0, 99999);
+  try {
+    document.execCommand('copy');
+    showCopied(btn);
+  } catch (e) {
+    alert('কপি করা যায়নি');
+  }
+  document.body.removeChild(ta);
+}
+
+function showCopied(btn) {
+  const orig = btn.textContent;
+  btn.classList.add('copied');
+  btn.textContent = '✓ হয়েছে';
+  setTimeout(() => {
+    btn.classList.remove('copied');
+    btn.textContent = orig;
+  }, 1500);
+  showToast();
+}
+
+// ===================== TOAST =====================
+let toastTimer;
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1500);
+}
+</script>
+</body>
+  </html>
