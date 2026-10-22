@@ -221,7 +221,7 @@ body::after {
 <body>
 
 <header class="page-header">
-  <!-- ⭐ এখানে id="backBtn" যোগ করা হয়েছে -->
+  <!-- ⭐ এখানে onclick সরানো হয়েছে, শুধু id রাখা হয়েছে -->
   <button class="back-btn" id="backBtn">🔙</button>
   <h1 class="page-title">ইসলামিক কুইজ</h1>
 </header>
@@ -263,7 +263,7 @@ body::after {
     <div class="result-actions">
       <button class="btn btn-primary" id="nextBtn" style="display:none;">Next Level</button>
       <button class="btn btn-primary" onclick="restartLevel()">আবার চেষ্টা করুন</button>
-      <button class="btn btn-ghost" onclick="goHome()">Lev Menu</button>
+      <button class="btn btn-ghost" onclick="goHome()">Level Menu</button>
     </div>
   </div>
 
@@ -545,7 +545,7 @@ document.getElementById('backBtn').addEventListener('click', () => {
     goHome(); // কুইজের লেভেল মেনুতে ফিরে যাবে
   } else {
     // লেভেল মেনুতে থাকলে মেইন হোমপেজে যাবে
-    window.location.href = 'index.html'; 
+    window.location.href = '../index.html'; 
   }
 });
 </script>
