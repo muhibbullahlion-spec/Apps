@@ -6,41 +6,8 @@
     <meta name="theme-color" content="#1a2332">
     <title>আলোর পথ</title>
     <link rel="stylesheet" href="style.css">
-
-    <!-- ===================== WEBPUSHR NOTIFICATION (ALTERNATIVE CODE) ===================== -->
-    <script>
-        (function(w,d, s, id) {
-            if(typeof(w.webpushr)!=='undefined') return;
-            w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};
-            var js, fjs = d.getElementsByTagName(s)[0];
-            js = d.createElement(s); js.id = id;js.async=1;
-            js.src = "https://cdn.webpushr.com/app.min.js";
-            fjs.parentNode.appendChild(js);
-        }(window,document, 'script', 'webpushr-jssdk-alternative'));
-        
-        webpushr('init','BAFg7MFCwpZEWHoxkjEBuNhW2ShdSRriBUg-1V_mITpG9okrLMBdAl0NTJWoa02vOaH5y2WtYqWEiCac-zBbUnY','https://muhibbullahlion-spec.github.io/Apps/webpushr-sw.js','/Apps/');
-    </script>
-    <!-- ================================================================================== -->
 </head>
 <body>
-
-    <!-- ===================== TEST BUTTON (পরে মুছে দিতে পারেন) ===================== -->
-    <div style="padding: 10px;">
-        <button onclick="askNotification()" style="width: 100%; padding: 15px; background: #4f46e5; color: white; border: none; border-radius: 10px; margin-top: 10px; font-weight: bold; font-size: 16px; font-family: inherit;">
-            🔔 টেস্ট: নোটিফিকেশন Allow করুন
-        </button>
-    </div>
-    <script>
-        function askNotification() {
-            if (window.webpushr) {
-                webpushr('prompt');
-                alert('✅ পপআপ আসলে Allow করুন।');
-            } else {
-                alert('🚨 Webpushr লোড হয়নি! ইন্টারনেট বা কোড চেক করুন।');
-            }
-        }
-    </script>
-    <!-- ===================================================================== -->
 
     <!-- ===================== SIDEBAR ===================== -->
     <div class="sidebar-overlay" id="overlay"></div>
@@ -251,4 +218,4 @@
 
     <script src="app.js"></script>
 </body>
-      </html>
+                        </html>
