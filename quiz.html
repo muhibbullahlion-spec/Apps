@@ -221,7 +221,7 @@ body::after {
 <body>
 
 <header class="page-header">
-  <!-- ⭐ এখানে onclick সরানো হয়েছে, শুধু id রাখা হয়েছে -->
+  <!-- ⭐ এখানে কোনো onclick নেই, শুধু আইডি -->
   <button class="back-btn" id="backBtn">🔙</button>
   <h1 class="page-title">ইসলামিক কুইজ</h1>
 </header>
@@ -533,19 +533,30 @@ function goHome() {
 }
 
 // ============================================================
-//                  INIT & BACK BUTTON LOGIC
+//                  INIT
 // ============================================================
 renderLevels();
 showScreen('level');
 
-// ⭐ ব্যাক বাটনের স্মার্ট লজিক
+// ============================================================
+// ⭐ ১০০% কাজ করা স্মার্ট ব্যাক বাটন লজিক
+// ============================================================
 document.getElementById('backBtn').addEventListener('click', () => {
-  // যদি কুইজ বা রেজাল্ট স্ক্রিন ওপেন থাকে
+  // ১. যদি কুইজ বা রেজাল্ট স্ক্রিনে থাকে, তবে কুইজের লেভেল মেনুতে যাবে
   if (quizScreen.classList.contains('active') || resultScreen.classList.contains('active')) {
-    goHome(); // কুইজের লেভেল মেনুতে ফিরে যাবে
+    goHome(); 
   } else {
-    // লেভেল মেনুতে থাকলে মেইন হোমপেজে যাবে
-    window.location.href = 'index.html'; 
+    // ২. যদি লেভেল মেনুতে থাকে, তবে মেইন হোমপেজে (index.html) যাবে।
+    // পাথের সমস্যা এড়াতে আমরা location.pathname ব্যবহার করছি।
+    let currentPath = window.location.pathname;
+    
+    // যদি ফাইলটি pages/ ফোল্ডারে থাকে
+    if (currentPath.includes('/pages/')) {
+      window.location.href = '../index.html';
+    } else {
+      // যদি ফাইলটি রুট ডিরেক্টরিতে থাকে
+      window.location.href = 'index.html';
+    }
   }
 });
 </script>
