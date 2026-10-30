@@ -358,6 +358,7 @@ loadRandomAyat();
   const lastUpdate = parseInt(localStorage.getItem('lastUpdateTime') || '0');
 
   if (wasRunning && savedStartTime > 0) {
+    // টাইমার আগে চলছিল, এখনো চলবে
     const now = Date.now();
     const gapSeconds = lastUpdate > 0
       ? Math.floor((now - lastUpdate) / 1000)
@@ -385,7 +386,8 @@ loadRandomAyat();
 
     updateDisplay();
   } else {
-    seconds = 0;
+    // ⭐ টাইমার বন্ধ ছিল, কিন্তু ক্লাউড থেকে হয়তো ডেটা এসেছে
+    seconds = savedSeconds; 
     updateDisplay();
   }
 })();
