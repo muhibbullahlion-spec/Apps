@@ -8,7 +8,7 @@
 // ============================================================
 async function signInWithGoogle() {
   if (!firebaseReady || !auth) {
-    showMessage('⚠️ Firebase লোড হয়নি');
+    showMessage('⚠️ Firebase লোড হয়নি (firebase-auth.js)');
     return null;
   }
 
@@ -29,7 +29,11 @@ async function signInWithGoogle() {
     if (error.code === 'auth/popup-blocked') {
       showMessage('❌ পপআপ ব্লক হয়েছে');
     } else if (error.code === 'auth/unauthorized-domain') {
-      showMessage('❌ ডোমেইন অনুমোদিত নয়');
+      showMessage('❌ ডোমেইন অনুমোদিত নয় (Firebase Console চেক করুন)');
+    } else if (error.code === 'auth/popup-closed-by-user') {
+      // ইউজার নিজে বন্ধ করেছে
+    } else {
+      showMessage('❌ লগইন ব্যর্থ: ' + error.message);
     }
     return null;
   }
@@ -63,7 +67,7 @@ function isLoggedIn() {
 }
 
 // ============================================================
-//  ☁️ CLOUD SYNC (নতুন)
+//  ☁️ CLOUD SYNC
 // ============================================================
 
 // ⬆️ লোকাল ডেটা ক্লাউডে সেভ করা
@@ -110,10 +114,9 @@ async function syncFromCloud() {
     if (docSnap.exists) {
       const data = docSnap.data();
 
-      // ডেটা আগে থেকে আছে কিনা চেক — কনফ্লিক্ট এড়াতে
+      // লোকালে ডেটা আছে কিনা চেক (কনফ্লিক্ট এড়াতে)
       const hasLocalData = localStorage.getItem('currentTimerSeconds');
 
-      // ⭐ শুধু তখনই রিস্টোর করবো যখন লোকাল ডেটা নেই (নতুন ফোন/ইনস্টল)
       if (!hasLocalData) {
         for (const key in data) {
           if (data[key] !== null && data[key] !== undefined) {
@@ -123,11 +126,7 @@ async function syncFromCloud() {
         console.log('✅ ক্লাউড থেকে ডেটা রিস্টোর হয়েছে');
         showMessage('✅ আপনার পুরনো ডেটা ফিরে এসেছে');
         setTimeout(() => location.reload(), 1500);
-      } else {
-        console.log('ℹ️ লোকাল ডেটা আছে, ক্লাউড থেকে রিস্টোর করা হলো না');
       }
-    } else {
-      console.log('ℹ️ নতুন ইউজার — ক্লাউডে কিছু নেই');
     }
   } catch (error) {
     console.error('❌ Cloud Load Error:', error);
@@ -145,7 +144,7 @@ function showMessage(msg) {
     toast.textContent = msg;
     toast.classList.add('show');
     clearTimeout(window._msgTimer);
-    window._msgTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    window._msgTimer = setTimeout(() => toast.classList.remove('show'), 2500);
   } else {
     console.log('[MSG]', msg);
   }
