@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1a2332">
-<title>আমার নোট</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#1a2332">
+    <title>আমার নোট</title>
+
+    <!-- Firebase SDK ও কনফিগারেশন -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+    <script src="../firebase-config.js"></script>
+    <script src="../firebase-auth.js"></script>
+
 <style>
 /* ===================== RESET ===================== */
 * {
@@ -301,7 +309,7 @@ body {
       rows="2"
     ></textarea>
     <div class="note-actions">
-      <button class="btn btn-ghost" id="clearBtn">Cancel</buton>
+      <button class="btn btn-ghost" id="clearBtn">Cancel</button>
       <button class="btn btn-primary" id="saveBtn">Save</button>
     </div>
   </div>
@@ -331,6 +339,11 @@ function loadNotes() {
 
 function saveNotes(notes) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+  
+  // ⭐ নোট সেভ হলেই ক্লাউডে সিঙ্ক করি
+  if (window.FirebaseAuth && window.FirebaseAuth.syncToCloud) {
+    window.FirebaseAuth.syncToCloud();
+  }
 }
 
 // ============================================================
