@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#1a2332">
     <title>আমার নোট</title>
 
-    <!-- Firebase SDK ও কনফিগারেশন -->
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
@@ -14,13 +14,7 @@
     <script src="../firebase-auth.js"></script>
 
 <style>
-/* ===================== RESET ===================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -31,268 +25,125 @@ body {
   line-height: 1.7;
 }
 
-/* ===================== HEADER ===================== */
 .page-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display: flex; align-items: center; gap: 10px;
   padding: 18px 16px 20px;
   background: #1a2332;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  position: sticky; top: 0; z-index: 10;
 }
 
 .back-btn {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: none;
-  background: transparent;
-  color: #e8edf3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 20px;
+  width: 38px; height: 38px; border-radius: 50%;
+  border: none; background: transparent; color: #e8edf3;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 20px;
 }
+.back-btn:active { background: rgba(255, 255, 255, 0.08); }
 
-.back-btn:active {
-  background: rgba(255, 255, 255, 0.08);
-}
+.page-title { font-size: 18px; font-weight: 600; color: #ffffff; flex: 1; }
 
-.page-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #ffffff;
-  flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+.container { padding: 0 16px 40px; max-width: 520px; margin: 0 auto; }
 
-/* ===================== CONTAINER ===================== */
-.container {
-  padding: 0 16px 40px;
-  max-width: 520px;
-  margin: 0 auto;
-}
-
-/* ===================== NEW NOTE INPUT ===================== */
 .new-note {
-  background: #212d3f;
-  border-radius: 12px;
-  padding: 14px 16px;
-  margin-bottom: 20px;
+  background: #212d3f; border-radius: 12px;
+  padding: 14px 16px; margin-bottom: 20px;
   border-left: 3px solid #4f46e5;
 }
 
 .note-input {
-  width: 100%;
-  background: transparent;
-  border: none;
-  color: #e8edf3;
-  font-family: inherit;
-  font-size: 15px;
-  line-height: 1.7;
-  resize: none;
-  outline: none;
-  min-height: 60px;
-  margin-bottom: 10px;
+  width: 100%; background: transparent; border: none;
+  color: #e8edf3; font-family: inherit; font-size: 15px;
+  line-height: 1.7; resize: none; outline: none;
+  min-height: 60px; margin-bottom: 10px;
 }
+.note-input::placeholder { color: #64748b; }
 
-.note-input::placeholder {
-  color: #64748b;
-}
-
-.note-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-}
+.note-actions { display: flex; justify-content: flex-end; gap: 8px; }
 
 .btn {
-  padding: 8px 18px;
-  border: none;
-  border-radius: 8px;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
+  padding: 8px 18px; border: none; border-radius: 8px;
+  font-family: inherit; font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
 }
+.btn:active { transform: scale(0.97); }
 
-.btn:active {
-  transform: scale(0.97);
-}
-
-.btn-primary {
-  background: #4f46e5;
-  color: #ffffff;
-}
-
-.btn-primary:active {
-  background: #4338ca;
-}
+.btn-primary { background: #4f46e5; color: #ffffff; }
+.btn-primary:active { background: #4338ca; }
 
 .btn-ghost {
-  background: transparent;
-  color: #94a3b8;
+  background: transparent; color: #94a3b8;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
+.btn-ghost:active { background: rgba(255, 255, 255, 0.05); }
 
-.btn-ghost:active {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-/* ===================== NOTES LIST ===================== */
-.notes-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+.notes-list { display: flex; flex-direction: column; gap: 10px; }
 
 .note-card {
-  background: #212d3f;
-  border-radius: 12px;
+  background: #212d3f; border-radius: 12px;
   padding: 14px 16px;
   border-left: 3px solid #4ade80;
   position: relative;
 }
 
 .note-text {
-  font-size: 15px;
-  color: #e2e8f0;
-  line-height: 1.75;
-  white-space: pre-wrap;
-  word-break: break-word;
-  margin-bottom: 10px;
+  font-size: 15px; color: #e2e8f0;
+  line-height: 1.75; white-space: pre-wrap;
+  word-break: break-word; margin-bottom: 10px;
 }
 
 .note-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding-top: 8px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; padding-top: 8px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.note-date {
-  font-size: 12px;
-  color: #64748b;
-}
-
-.note-buttons {
-  display: flex;
-  gap: 6px;
-}
+.note-date { font-size: 12px; color: #64748b; }
+.note-buttons { display: flex; gap: 6px; }
 
 .icon-btn {
-  width: 30px;
-  height: 30px;
-  border-radius: 6px;
-  border: none;
-  background: transparent;
-  color: #94a3b8;
-  font-size: 15px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 30px; height: 30px; border-radius: 6px;
+  border: none; background: transparent; color: #94a3b8;
+  font-size: 15px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
   transition: all 0.2s;
 }
+.icon-btn:active { background: rgba(255, 255, 255, 0.08); }
+.icon-btn.edit:active { color: #a5b4fc; }
+.icon-btn.delete:active { color: #f87171; }
 
-.icon-btn:active {
-  background: rgba(255, 255, 255, 0.08);
-}
+.empty { text-align: center; padding: 70px 20px; color: #64748b; }
+.empty-icon { font-size: 48px; margin-bottom: 14px; opacity: 0.5; }
+.empty p { font-size: 15px; }
 
-.icon-btn.edit:active {
-  color: #a5b4fc;
-}
-
-.icon-btn.delete:active {
-  color: #f87171;
-}
-
-/* ===================== EMPTY STATE ===================== */
-.empty {
-  text-align: center;
-  padding: 70px 20px;
-  color: #64748b;
-}
-
-.empty-icon {
-  font-size: 48px;
-  margin-bottom: 14px;
-  opacity: 0.5;
-}
-
-.empty p {
-  font-size: 15px;
-}
-
-/* ===================== EDIT MODE ===================== */
-.note-card.editing {
-  border-left-color: #fbbf24;
-}
-
-.note-card.editing .note-text {
-  display: none;
-}
+.note-card.editing { border-left-color: #fbbf24; }
+.note-card.editing .note-text { display: none; }
 
 .edit-area {
-  display: none;
-  width: 100%;
-  background: #141c28;
-  border: 1.5px solid #4f46e5;
-  border-radius: 8px;
-  color: #e8edf3;
-  font-family: inherit;
-  font-size: 15px;
-  line-height: 1.7;
-  padding: 10px 12px;
-  resize: vertical;
-  outline: none;
-  min-height: 70px;
-  margin-bottom: 10px;
+  display: none; width: 100%;
+  background: #141c28; border: 1.5px solid #4f46e5;
+  border-radius: 8px; color: #e8edf3;
+  font-family: inherit; font-size: 15px; line-height: 1.7;
+  padding: 10px 12px; resize: vertical; outline: none;
+  min-height: 70px; margin-bottom: 10px;
 }
+.note-card.editing .edit-area { display: block; }
 
-.note-card.editing .edit-area {
-  display: block;
-}
-
-/* ===================== TOAST ===================== */
 .toast {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
+  position: fixed; bottom: 30px; left: 50%;
   transform: translateX(-50%) translateY(100px);
-  background: #16a34a;
-  color: #ffffff;
-  padding: 10px 20px;
-  border-radius: 24px;
-  font-size: 13px;
-  font-weight: 500;
+  background: #16a34a; color: #ffffff;
+  padding: 10px 20px; border-radius: 24px;
+  font-size: 13px; font-weight: 500;
   box-shadow: 0 6px 20px rgba(22, 163, 74, 0.3);
-  z-index: 2000;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2000; transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
 }
-
-.toast.show {
-  transform: translateX(-50%) translateY(0);
-}
-
-.toast.danger {
-  background: #dc2626;
-  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
-}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.danger { background: #dc2626; box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3); }
 </style>
 </head>
 <body>
 
-<!-- ===================== HEADER ===================== -->
 <header class="page-header">
   <button class="back-btn" onclick="history.back()">🔙</button>
   <h1 class="page-title">আমার নোট</h1>
@@ -300,26 +151,18 @@ body {
 
 <div class="container">
 
-  <!-- ===================== NEW NOTE INPUT ===================== -->
   <div class="new-note">
-    <textarea 
-      id="noteInput" 
-      class="note-input" 
-      placeholder="Write a note"
-      rows="2"
-    ></textarea>
+    <textarea id="noteInput" class="note-input" placeholder="Write a note" rows="2"></textarea>
     <div class="note-actions">
       <button class="btn btn-ghost" id="clearBtn">Cancel</button>
       <button class="btn btn-primary" id="saveBtn">Save</button>
     </div>
   </div>
 
-  <!-- ===================== NOTES LIST ===================== -->
   <div class="notes-list" id="notesList"></div>
 
 </div>
 
-<!-- ===================== TOAST ===================== -->
 <div class="toast" id="toast">Saved</div>
 
 <script>
@@ -340,7 +183,7 @@ function loadNotes() {
 function saveNotes(notes) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
   
-  // ⭐ নোট সেভ হলেই ক্লাউডে সিঙ্ক করি
+  // ⭐ নোট সেভ হলেই ক্লাউডে সিঙ্ক
   if (window.FirebaseAuth && window.FirebaseAuth.syncToCloud) {
     window.FirebaseAuth.syncToCloud();
   }
@@ -395,10 +238,7 @@ function render() {
       <div class="note-card ${isEditing ? 'editing' : ''}" data-id="${n.id}">
         <div class="note-text">${escapeHtml(n.text)}</div>
 
-        <textarea 
-          class="edit-area" 
-          id="edit-${n.id}"
-        >${escapeHtml(n.text)}</textarea>
+        <textarea class="edit-area" id="edit-${n.id}">${escapeHtml(n.text)}</textarea>
 
         <div class="note-meta">
           <span class="note-date">${formatDate(n.createdAt)}</span>
@@ -415,7 +255,6 @@ function render() {
     `;
   }).join('');
 
-  // এডিট মোডে থাকলে ফোকাস করি
   if (editingId) {
     const ta = document.getElementById('edit-' + editingId);
     if (ta) {
@@ -431,7 +270,6 @@ function render() {
 //                  ACTIONS
 // ============================================================
 
-// ---------- Save New Note ----------
 document.getElementById('saveBtn').addEventListener('click', () => {
   const input = document.getElementById('noteInput');
   const text = input.value.trim();
@@ -456,20 +294,17 @@ document.getElementById('saveBtn').addEventListener('click', () => {
   showToast('নোট সেভ হয়েছে');
 });
 
-// ---------- Clear Input ----------
 document.getElementById('clearBtn').addEventListener('click', () => {
   const input = document.getElementById('noteInput');
   input.value = '';
   input.style.height = 'auto';
 });
 
-// ---------- Start Edit ----------
 function startEdit(id) {
   editingId = id;
   render();
 }
 
-// ---------- Save Edit ----------
 function saveEdit(id) {
   const ta = document.getElementById('edit-' + id);
   if (!ta) return;
@@ -493,13 +328,11 @@ function saveEdit(id) {
   showToast('নোট আপডেট হয়েছে');
 }
 
-// ---------- Cancel Edit ----------
 function cancelEdit() {
   editingId = null;
   render();
 }
 
-// ---------- Delete Note ----------
 function deleteNote(id) {
   if (!confirm('এই নোটটি মুছে ফেলবেন?')) return;
 
@@ -519,7 +352,6 @@ input.addEventListener('input', () => {
   input.style.height = Math.min(input.scrollHeight, 200) + 'px';
 });
 
-// Ctrl+Enter চাপলে সেভ
 input.addEventListener('keydown', (e) => {
   if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
     document.getElementById('saveBtn').click();
@@ -542,10 +374,57 @@ function showToast(message, isDanger) {
 }
 
 // ============================================================
-//                  INIT
+//                  CLOUD SYNC ON LOAD
 // ============================================================
 
-render();
+// ⭐ পেজ লোড হলে ক্লাউড থেকে ডেটা চেক করি (শুধু প্রথমবার)
+async function checkCloudData() {
+  if (!window.FirebaseAuth) return;
+  if (!FirebaseAuth.isLoggedIn()) return;
+  
+  // ⭐ এই সেশনে আগেই সিঙ্ক হয়েছে কিনা চেক
+  if (sessionStorage.getItem('noteSyncDone') === 'true') {
+    return; // আগেই সিঙ্ক হয়েছে
+  }
+  
+  try {
+    const { db, auth } = window;
+    if (!db || !auth) return;
+    const user = auth.currentUser;
+    if (!user) return;
+    
+    const docSnap = await db.collection('users').doc(user.uid).get();
+    if (docSnap.exists) {
+      const data = docSnap.data();
+      if (data.myNotes) {
+        localStorage.setItem('myNotes', data.myNotes);
+        console.log('✅ নোট ক্লাউড থেকে ফিরে এসেছে');
+        sessionStorage.setItem('noteSyncDone', 'true');
+        render(); // ⭐ নোট রেন্ডার
+      }
+    }
+  } catch (e) {
+    console.error('❌ Note sync error:', e);
+  }
+}
+
+// ⭐ পেজ লোডে ডেটা চেক + রেন্ডার
+(async () => {
+  // প্রথমে লোকাল ডেটা রেন্ডার
+  render();
+  
+  // তারপর ক্লাউড চেক (যদি লগইন থাকে)
+  await checkCloudData();
+  
+  // ⭐ ক্লাউড থেকে আসার পর আবার রেন্ডার
+  render();
+})();
+
+// ⭐ authStateChanged এ আবার চেক
+window.addEventListener('authStateChanged', async () => {
+  await checkCloudData();
+  render();
+});
 </script>
 </body>
-  </html>
+</html>
