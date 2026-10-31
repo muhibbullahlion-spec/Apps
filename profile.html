@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#1a2332">
     <title>Profile</title>
     
-    <!-- Firebase SDK ও কনফিগারেশন -->
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
@@ -14,13 +14,7 @@
     <script src="firebase-auth.js"></script>
 
 <style>
-/* ===================== RESET ===================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -31,248 +25,121 @@ body {
   line-height: 1.7;
 }
 
-/* ===================== HEADER ===================== */
 .page-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display: flex; align-items: center; gap: 10px;
   padding: 18px 16px 20px;
   background: #1a2332;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  position: sticky; top: 0; z-index: 10;
 }
 
 .back-btn {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: none;
-  background: transparent;
-  color: #e8edf3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 20px;
+  width: 38px; height: 38px; border-radius: 50%;
+  border: none; background: transparent; color: #e8edf3;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 20px;
 }
-
 .back-btn:active { background: rgba(255, 255, 255, 0.08); }
 
-.page-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #ffffff;
-  flex: 1;
-}
+.page-title { font-size: 18px; font-weight: 600; color: #ffffff; flex: 1; }
 
-/* ===================== CONTAINER ===================== */
-.container {
-  padding: 0 16px 40px;
-  max-width: 520px;
-  margin: 0 auto;
-}
+.container { padding: 0 16px 40px; max-width: 520px; margin: 0 auto; }
 
-/* ===================== PROFILE CARD ===================== */
 .profile-card {
-  background: #212d3f;
-  border-radius: 16px;
-  padding: 28px 20px 22px;
-  text-align: center;
+  background: #212d3f; border-radius: 16px;
+  padding: 28px 20px 22px; text-align: center;
   margin-bottom: 20px;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .profile-avatar {
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
+  width: 88px; height: 88px; border-radius: 50%;
   background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 14px;
-  font-size: 40px;
-  color: #ffffff;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px; font-size: 40px; color: #ffffff;
   border: 3px solid #1a2332;
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
   overflow: hidden;
 }
+.profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-.profile-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+.profile-name { font-size: 19px; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
+.profile-email { font-size: 13.5px; color: #94a3b8; margin-bottom: 16px; }
 
-.profile-name {
-  font-size: 19px;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 4px;
-}
-
-.profile-email {
-  font-size: 13.5px;
-  color: #94a3b8;
-  margin-bottom: 16px;
-}
-
-/* ===================== GOOGLE LOGIN BUTTON ===================== */
 .google-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 24px;
-  background: #ffffff;
-  color: #1a2332;
-  border: none;
-  border-radius: 10px;
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  max-width: 280px;
-  margin: 0 auto;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 10px; padding: 12px 24px; background: #ffffff; color: #1a2332;
+  border: none; border-radius: 10px; font-family: inherit;
+  font-size: 15px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  width: 100%; max-width: 280px; margin: 0 auto;
 }
+.google-btn:active { transform: scale(0.98); }
+.google-btn svg { width: 20px; height: 20px; }
 
-.google-btn:active {
-  transform: scale(0.98);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-}
-
-.google-btn svg {
-  width: 20px;
-  height: 20px;
-}
-
-/* ===================== LOGOUT BUTTON ===================== */
 .logout-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background: rgba(220, 38, 38, 0.12);
-  color: #f87171;
-  border: 1px solid rgba(220, 38, 38, 0.3);
-  border-radius: 10px;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-top: 12px;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; padding: 10px 20px;
+  background: rgba(220, 38, 38, 0.12); color: #f87171;
+  border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 10px;
+  font-family: inherit; font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; margin-top: 12px;
 }
+.logout-btn:active { background: rgba(220, 38, 38, 0.2); }
 
-.logout-btn:active {
-  background: rgba(220, 38, 38, 0.2);
-}
-
-/* ===================== INFO SECTION ===================== */
 .info-section {
-  background: #212d3f;
-  border-radius: 12px;
-  overflow: hidden;
+  background: #212d3f; border-radius: 12px; overflow: hidden;
   margin-bottom: 16px;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .info-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: flex; align-items: center; justify-content: space-between;
   padding: 14px 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
-
 .info-row:last-child { border-bottom: none; }
 
 .info-label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 14.5px;
-  color: #cbd5e1;
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14.5px; color: #cbd5e1;
 }
+.info-icon { font-size: 18px; width: 24px; text-align: center; }
+.info-value { font-size: 14.5px; color: #ffffff; font-weight: 600; }
+.info-value.muted { color: #64748b; font-weight: 400; font-size: 13.5px; }
 
-.info-icon {
-  font-size: 18px;
-  width: 24px;
-  text-align: center;
-}
-
-.info-value {
-  font-size: 14.5px;
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.info-value.muted {
-  color: #64748b;
-  font-weight: 400;
-  font-size: 13.5px;
-}
-
-/* ===================== SECTION TITLE ===================== */
 .section-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: #64748b;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  font-size: 13px; font-weight: 600; color: #64748b;
+  letter-spacing: 0.5px; text-transform: uppercase;
   margin: 20px 4px 10px;
 }
 
-/* ===================== NOTE ===================== */
 .note {
   background: rgba(251, 191, 36, 0.06);
   border: 1px solid rgba(251, 191, 36, 0.2);
-  border-radius: 10px;
-  padding: 14px 16px;
-  font-size: 13px;
-  color: #cbd5e1;
-  line-height: 1.7;
+  border-radius: 10px; padding: 14px 16px;
+  font-size: 13px; color: #cbd5e1; line-height: 1.7;
   margin-top: 16px;
 }
-
 .note-title {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: #fbbf24;
-  margin-bottom: 6px;
-  letter-spacing: 0.3px;
+  font-size: 12.5px; font-weight: 600; color: #fbbf24;
+  margin-bottom: 6px; letter-spacing: 0.3px;
 }
 
-/* ===================== TOAST ===================== */
 .toast {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
+  position: fixed; bottom: 30px; left: 50%;
   transform: translateX(-50%) translateY(100px);
-  background: #4f46e5;
-  color: #ffffff;
-  padding: 12px 22px;
-  border-radius: 24px;
-  font-size: 13px;
-  font-weight: 500;
+  background: #4f46e5; color: #ffffff;
+  padding: 12px 22px; border-radius: 24px;
+  font-size: 13px; font-weight: 500;
   box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
-  z-index: 2000;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  white-space: nowrap;
-  max-width: 90%;
+  z-index: 2000; transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap; max-width: 90%;
 }
-
 .toast.show { transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- ===================== HEADER ===================== -->
 <header class="page-header">
   <button class="back-btn" onclick="history.back()">←</button>
   <h1 class="page-title">Profile</h1>
@@ -280,13 +147,11 @@ body {
 
 <div class="container">
 
-  <!-- ===================== PROFILE CARD ===================== -->
   <div class="profile-card">
     <div class="profile-avatar" id="avatarEl">👤</div>
     <div class="profile-name" id="nameEl">অতিথি ব্যবহারকারী</div>
     <div class="profile-email" id="emailEl">লগইন করা হয়নি</div>
 
-    <!-- গুগল লগইন বাটন -->
     <button class="google-btn" id="googleBtn" onclick="handleGoogleLogin()">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -302,65 +167,40 @@ body {
     </button>
   </div>
 
-  <!-- ===================== STATISTICS ===================== -->
   <div class="section-title">📊 আপনার পরিসংখ্যান</div>
 
   <div class="info-section">
     <div class="info-row">
-      <div class="info-label">
-        <span class="info-icon">⏱️</span>
-        <span>বর্তমান স্ট্রিক</span>
-      </div>
+      <div class="info-label"><span class="info-icon">⏱️</span><span>বর্তমান স্ট্রিক</span></div>
       <span class="info-value" id="statStreak">০ দিন</span>
     </div>
-
     <div class="info-row">
-      <div class="info-label">
-        <span class="info-icon">📝</span>
-        <span>মোট রিপোর্ট</span>
-      </div>
+      <div class="info-label"><span class="info-icon">📝</span><span>মোট রিপোর্ট</span></div>
       <span class="info-value" id="statReports">০</span>
     </div>
-
     <div class="info-row">
-      <div class="info-label">
-        <span class="info-icon">🏆</span>
-        <span>সর্বোচ্চ স্ট্রিক</span>
-      </div>
+      <div class="info-label"><span class="info-icon">🏆</span><span>সর্বোচ্চ স্ট্রিক</span></div>
       <span class="info-value" id="statBest">০ দিন</span>
     </div>
-
     <div class="info-row">
-      <div class="info-label">
-        <span class="info-icon">📅</span>
-        <span>অ্যাপ ব্যবহার শুরু</span>
-      </div>
+      <div class="info-label"><span class="info-icon">📅</span><span>অ্যাপ ব্যবহার শুরু</span></div>
       <span class="info-value muted" id="statJoined">আজ</span>
     </div>
   </div>
 
-  <!-- ===================== ACCOUNT INFO ===================== -->
   <div class="section-title">👤 অ্যাকাউন্ট</div>
 
   <div class="info-section">
     <div class="info-row">
-      <div class="info-label">
-        <span class="info-icon">🔐</span>
-        <span>লগইন অবস্থা</span>
-      </div>
+      <div class="info-label"><span class="info-icon">🔐</span><span>লগইন অবস্থা</span></div>
       <span class="info-value muted" id="accStatus">লগইন নেই</span>
     </div>
-
     <div class="info-row">
-      <div class="info-label">
-        <span class="info-icon">📱</span>
-        <span>ডিভাইস</span>
-      </div>
+      <div class="info-label"><span class="info-icon">📱</span><span>ডিভাইস</span></div>
       <span class="info-value muted" id="accDevice">—</span>
     </div>
   </div>
 
-  <!-- ===================== NOTE ===================== -->
   <div class="note">
     <div class="note-title">ℹ️ লগইন সম্পর্কে</div>
     লগইন করলে আপনার ডেটা (স্ট্রিক, রিপোর্ট, নোট) ক্লাউডে সেভ হবে। অ্যাপ ডিলিট করলেও লগইন করলে আবার সব ফিরে পাবেন।
@@ -368,13 +208,9 @@ body {
 
 </div>
 
-<!-- ===================== TOAST ===================== -->
 <div class="toast" id="toast">বার্তা</div>
 
 <script>
-// ============================================================
-//                  HELPERS
-// ============================================================
 function toBangla(num) {
   const bn = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
   return String(num).replace(/\d/g, d => bn[d]);
@@ -389,9 +225,6 @@ function showToast(message) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-// ============================================================
-//                  PROFILE RENDER
-// ============================================================
 function renderProfile() {
   const user = window.FirebaseAuth ? FirebaseAuth.getUser() : { name: null, email: null, photo: null, uid: null };
   const loggedIn = window.FirebaseAuth ? FirebaseAuth.isLoggedIn() : false;
@@ -426,9 +259,6 @@ function renderProfile() {
   }
 }
 
-// ============================================================
-//                  STATS RENDER
-// ============================================================
 function renderStats() {
   const savedSeconds = parseInt(localStorage.getItem('currentTimerSeconds') || '0');
   const days = Math.floor(savedSeconds / 86400);
@@ -465,11 +295,6 @@ function renderStats() {
   document.getElementById('accDevice').textContent = device;
 }
 
-// ============================================================
-//                  LOGIN & LOGOUT
-// ============================================================
-
-// ⭐ গুগল লগইন হ্যান্ডলার
 async function handleGoogleLogin() {
   if (!window.FirebaseAuth) {
     showToast('⚠️ Firebase লোড হয়নি');
@@ -481,47 +306,45 @@ async function handleGoogleLogin() {
 
   if (user) {
     showToast('✅ লগইন সফল');
-    
-    // লগইন হলে সাথে সাথে ক্লাউড থেকে ডেটা চেক করি
-    if (FirebaseAuth.syncFromCloud) {
-      await FirebaseAuth.syncFromCloud(); // এখানে syncFromCloud এর ভেতরে location.reload() আছে, যা ডেটা আপডেট করবে
-    } else {
-      // যদি syncFromCloud না থাকে, তবুও UI আপডেট হবে
+    // ⭐ সিঙ্ক শুধু firebase-config.js এর onAuthStateChanged এ হবে
+    // এখানে আলাদা কল করার দরকার নেই
+    setTimeout(() => {
       renderProfile();
       renderStats();
-    }
+    }, 500);
   } else {
     showToast('❌ লগইন ব্যর্থ হয়েছে');
     renderProfile();
   }
 }
 
-// ⭐ লগআউট হ্যান্ডলার
 async function handleLogout() {
-  if (!confirm('লগআউট করবেন? লগআউট করলে এই ফোনের ডেটা সেভ থাকবে, কিন্তু ক্লাউডে আপডেট হবে না।')) return;
+  if (!confirm('লগআউট করবেন?')) return;
   
   if (window.FirebaseAuth) {
     await FirebaseAuth.signOut();
   }
   showToast('👋 লগআউট সম্পন্ন');
-  renderProfile();
-  renderStats();
+  
+  setTimeout(() => {
+    renderProfile();
+    renderStats();
+  }, 300);
 }
 
-// ============================================================
-//                  AUTH STATE LISTENER
-// ============================================================
-// অ্যাপ লোড হওয়ার সময় যদি অলরেডি লগইন থাকে, তবে UI আপডেট হবে
+// ⭐ লগইন স্টেট চেঞ্জে UI আপডেট
 window.addEventListener('authStateChanged', () => {
   renderProfile();
   renderStats();
 });
 
-// ============================================================
-//                  INIT
-// ============================================================
+// ⭐ ক্লাউড থেকে ডেটা আসলে স্ট্যাটস আপডেট
+window.addEventListener('dataRestoredFromCloud', () => {
+  renderStats();
+});
+
 renderProfile();
 renderStats();
 </script>
 </body>
-                    </html>
+    </html>
