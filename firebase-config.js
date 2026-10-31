@@ -1,6 +1,6 @@
 // ============================================================
 //                  Firebase Configuration
-//                  আলোর পথ
+//                  আলোর পথ (Fixed)
 // ============================================================
 
 const firebaseConfig = {
@@ -13,8 +13,6 @@ const firebaseConfig = {
   measurementId: "G-5K7F066G6H"
 };
 
-// ⚠️ উপরে আপনার আসল Firebase Config বসান
-
 let firebaseReady = false;
 let auth = null;
 let db = null;
@@ -25,18 +23,14 @@ let db = null;
       console.warn('⚠️ Firebase SDK লোড হয়নি');
       return;
     }
-    if (!firebaseConfig.apiKey || firebaseConfig.apiKey.includes('PASTE')) {
-      console.warn('⚠️ Firebase Config সেট করা হয়নি');
-      return;
-    }
 
     firebase.initializeApp(firebaseConfig);
     auth = firebase.auth();
-    db = firebase.firestore();   // ⭐ Firestore চালু
+    db = firebase.firestore();
     firebaseReady = true;
     console.log('🔥 Firebase initialized');
 
-    // লগইন স্টেট চেঞ্জ হলে ডেটা লোড করবো
+    // ⭐ লগইন স্টেট চেঞ্জ
     auth.onAuthStateChanged((user) => {
       if (user) {
         localStorage.setItem('userId', user.uid);
@@ -45,13 +39,18 @@ let db = null;
         localStorage.setItem('userPhoto', user.photoURL || '');
         console.log('👤 লগইন:', user.displayName);
 
-        // ⭐ লগইন হলে ক্লাউড থেকে ডেটা লোড করি
+        // ⭐ শুধু প্রথমবার সিঙ্ক করবো (sessionStorage চেক হবে ভেতরে)
         syncFromCloud();
+        
       } else {
         localStorage.removeItem('userId');
         localStorage.removeItem('userName');
         localStorage.removeItem('userEmail');
         localStorage.removeItem('userPhoto');
+        
+        // ⭐ লগআউট হলে সেশন ফ্ল্যাগ ক্লিয়ার
+        sessionStorage.removeItem('hasSyncedThisSession');
+        console.log('👤 লগইন নেই');
       }
       window.dispatchEvent(new CustomEvent('authStateChanged'));
     });
