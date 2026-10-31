@@ -1,12 +1,12 @@
 // ============================================================
-//                  Firebase Auth + Cloud Sync (Fixed)
+//                  Firebase Auth + Cloud Sync
+//                  আলোর পথ (Fixed - No Reload Loop)
 // ============================================================
 
 // ============================================================
 //  🔐 Google Login
 // ============================================================
 async function signInWithGoogle() {
-  // চেক করছি Firebase ঠিকমতো লোড হয়েছে কিনা
   if (typeof firebaseReady === 'undefined' || !firebaseReady || !auth) {
     showMessage('⚠️ Firebase লোড হয়নি');
     return null;
@@ -14,7 +14,6 @@ async function signInWithGoogle() {
 
   try {
     const provider = new firebase.auth.GoogleAuthProvider();
-    // পপআপ ব্লক এড়াতে prompt সেট করা
     provider.setCustomParameters({ prompt: 'select_account' });
     
     const result = await auth.signInWithPopup(provider);
@@ -34,7 +33,7 @@ async function signInWithGoogle() {
     } else if (error.code === 'auth/unauthorized-domain') {
       showMessage('❌ ডোমেইন অনুমোদিত নয়');
     } else if (error.code === 'auth/popup-closed-by-user') {
-      // ইউজার নিজে বন্ধ করেছে, কিছু বলার দরকার নেই
+      // নিজে বন্ধ করেছে
     } else {
       showMessage('❌ লগইন ব্যর্থ: ' + error.message);
     }
@@ -53,6 +52,10 @@ async function signOutUser() {
   localStorage.removeItem('userName');
   localStorage.removeItem('userEmail');
   localStorage.removeItem('userPhoto');
+  
+  // ⭐ লগআউটে সেশন ফ্ল্যাগ রিসেট
+  sessionStorage.removeItem('hasSyncedThisSession');
+  
   showMessage('👋 লগআউট সম্পন্ন');
 }
 
@@ -73,11 +76,15 @@ function isLoggedIn() {
 //  ☁️ CLOUD SYNC
 // ============================================================
 
-// ⬆️ লোকাল ডেটা ক্লাউডে সেভ করা
+// ⬆️ লোকাল ডেটা ক্লাউডে সেভ
+let isSyncingToCloud = false;
 async function syncToCloud() {
   if (typeof firebaseReady === 'undefined' || !firebaseReady || !db || !auth) return;
   const user = auth.currentUser;
   if (!user) return;
+  if (isSyncingToCloud) return;
+  
+  isSyncingToCloud = true;
 
   try {
     const userDoc = db.collection('users').doc(user.uid);
@@ -98,16 +105,25 @@ async function syncToCloud() {
     console.log('☁️ ক্লাউডে সেভ হয়েছে');
   } catch (error) {
     console.error('❌ Cloud Save Error:', error);
+  } finally {
+    isSyncingToCloud = false;
   }
 }
 
-// ⬇️ ক্লাউড থেকে ডেটা নিয়ে লোকালস্টোরেজে সেভ (Master Sync)
+// ⬇️ ক্লাউড থেকে ডেটা নিয়ে লোকালস্টোরেজে সেভ (একবারই, রিলোড ছাড়া)
 let isSyncingFromCloud = false;
 async function syncFromCloud() {
   if (typeof firebaseReady === 'undefined' || !firebaseReady || !db || !auth) return;
   const user = auth.currentUser;
   if (!user) return;
+  
+  // ⭐ Infinite loop ব্লক — এই সেশনে একবার সিঙ্ক হলে আর হবে না
   if (isSyncingFromCloud) return;
+  if (sessionStorage.getItem('hasSyncedThisSession') === 'true') {
+    console.log('ℹ️ এই সেশনে আগেই সিঙ্ক হয়েছে');
+    return;
+  }
+  
   isSyncingFromCloud = true;
 
   try {
@@ -117,27 +133,33 @@ async function syncFromCloud() {
     if (docSnap.exists) {
       const data = docSnap.data();
 
-      // ক্লাউড থেকে সব ডেটা লোকালে কপি করি
+      // ক্লাউড থেকে সব ডেটা লোকালে কপি
       for (const key in data) {
         if (data[key] !== null && data[key] !== undefined) {
           localStorage.setItem(key, data[key]);
         }
       }
+      
       console.log('✅ ক্লাউড থেকে ডেটা রিস্টোর হয়েছে');
       showMessage('✅ আপনার পুরনো ডেটা ফিরে এসেছে');
       
-      // পেজ রিলোড দিলে টাইমার ও নোট আপডেট হয়ে যাবে
-      setTimeout(() => {
-        if (window.location.pathname.includes('profile.html')) {
-           window.location.href = '../index.html'; // প্রোফাইল থেকে হোমে নিয়ে যাবে
-        } else {
-           location.reload(); // অন্য পেজে থাকলে রিলোড হবে
-        }
-      }, 1500);
-
+      // ⭐ সেশন ফ্ল্যাগ সেট করি যাতে আর রিলোড না হয়
+      sessionStorage.setItem('hasSyncedThisSession', 'true');
+      
+      // ⭐ রিলোড না করে সরাসরি UI আপডেট
+      window.dispatchEvent(new CustomEvent('dataRestoredFromCloud'));
+      
+      // ⭐ প্রোফাইল পেজে থাকলে হোমে যাবে, অন্যথায় ডেটা দেখাবে
+      if (window.location.pathname.includes('profile.html')) {
+        setTimeout(() => window.location.href = '../index.html', 1500);
+      }
+      // ⭐ অন্য পেজে (index, note, quiz) থাকলে কোনো রিলোড হবে না
+      
     } else {
-      // ক্লাউডে ডেটা নেই, ফোনের ডেটা ক্লাউডে আপলোড করি
-      syncToCloud();
+      // ক্লাউডে ডেটা নেই — নতুন ইউজার, ফোনের ডেটা আপলোড করি
+      console.log('ℹ️ নতুন ইউজার, ফোনের ডেটা ক্লাউডে আপলোড হচ্ছে');
+      await syncToCloud();
+      sessionStorage.setItem('hasSyncedThisSession', 'true');
     }
   } catch (error) {
     console.error('❌ Cloud Load Error:', error);
