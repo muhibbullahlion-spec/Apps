@@ -1,6 +1,6 @@
 // ============================================================
 //                  আলোর পথ - Main App Logic
-//                  (Timer + Firebase Cloud Sync)
+//                  (Timer continues while modal is open)
 // ============================================================
 
 // ===================== SIDEBAR =====================
@@ -31,16 +31,6 @@ document.querySelectorAll('.menu-item').forEach(item => {
     overlay.classList.remove('active');
   });
 });
-
-// ============================================================
-//                  CLOUD SYNC HELPER
-// ============================================================
-// ⭐ ডেটা পরিবর্তন হলেই এই ফাংশনটি ক্লাউডে সিঙ্ক করবে
-function triggerCloudSync() {
-  if (window.FirebaseAuth && window.FirebaseAuth.syncToCloud) {
-    window.FirebaseAuth.syncToCloud();
-  }
-}
 
 // ============================================================
 //                  TIMER SYSTEM
@@ -96,28 +86,22 @@ function startTimer() {
   localStorage.setItem('currentTimerSeconds', seconds.toString());
   localStorage.setItem('lastUpdateTime', Date.now().toString());
 
-  // ⭐ টাইমার শুরু হলেই ক্লাউডে সিঙ্ক
-  triggerCloudSync();
-
   interval = setInterval(() => {
     seconds++;
     updateDisplay();
     localStorage.setItem('currentTimerSeconds', seconds.toString());
     localStorage.setItem('lastUpdateTime', Date.now().toString());
     checkMilestone();
-    
-    // ⭐ প্রতি ১০ সেকেন্ড পর পর ক্লাউডে সিঙ্ক (ডেটা লস রোধে)
-    if (seconds % 10 === 0) {
-      triggerCloudSync();
-    }
   }, 1000);
 }
 
-// ---------- Show Report Modal ----------
+// ---------- Show Report Modal (টাইমার বন্ধ হয় না) ----------
 function showReportModal() {
+  // ⭐ টাইমার চলতেই থাকবে — শুধু পপআপ দেখাও
   const failedSeconds = seconds;
   const failedAt = new Date();
 
+  // ব্যর্থতার তথ্য modal এ দেখাও
   const timeEl = document.getElementById('failedTimeText');
   const dateEl = document.getElementById('failedDateText');
   if (timeEl) timeEl.textContent = humanTime(failedSeconds);
@@ -132,7 +116,7 @@ function showReportModal() {
   openReportModal(failedSeconds, startTimeMs, failedAt);
 }
 
-// ---------- Actually Stop Timer ----------
+// ---------- Actually Stop Timer (OK চাপলে) ----------
 function actuallyStopTimer() {
   clearInterval(interval);
   running = false;
@@ -142,6 +126,7 @@ function actuallyStopTimer() {
 
 startBtn.addEventListener('click', () => {
   if (running) {
+    // ⭐ টাইমার চলছে — শুধু modal দেখাও
     showReportModal();
   } else {
     startTimer();
@@ -187,17 +172,16 @@ function resetTimer() {
   localStorage.removeItem('timerStartTime');
   localStorage.removeItem('lastUpdateTime');
   localStorage.removeItem('shownMilestones');
-  
-  // ⭐ রিসেট হলেই ক্লাউডে সিঙ্ক
-  triggerCloudSync();
 }
 
-// ---------- Cancel Button ----------
+// ---------- Cancel Button (টাইমার চলতে থাকবে) ----------
 cancelReport.addEventListener('click', () => {
   closeReportModal();
+  // ⭐ টাইমার রিসেট করবো না — চলতেই থাকবে
+  // pendingReport শুধু ক্লিয়ার করবো
 });
 
-// ---------- Save Button ----------
+// ---------- Save Button (টাইমার বন্ধ হবে) ----------
 saveReport.addEventListener('click', () => {
   if (!pendingReport) return;
 
@@ -218,11 +202,9 @@ saveReport.addEventListener('click', () => {
 
   closeReportModal();
 
+  // ⭐ এখন টাইমার সত্যিই বন্ধ করো
   actuallyStopTimer();
   resetTimer();
-  
-  // ⭐ রিপোর্ট সেভ হলেই ক্লাউডে সিঙ্ক
-  triggerCloudSync();
 });
 
 // ============================================================
@@ -358,7 +340,6 @@ loadRandomAyat();
   const lastUpdate = parseInt(localStorage.getItem('lastUpdateTime') || '0');
 
   if (wasRunning && savedStartTime > 0) {
-    // টাইমার আগে চলছিল, এখনো চলবে
     const now = Date.now();
     const gapSeconds = lastUpdate > 0
       ? Math.floor((now - lastUpdate) / 1000)
@@ -377,17 +358,11 @@ loadRandomAyat();
       localStorage.setItem('currentTimerSeconds', seconds.toString());
       localStorage.setItem('lastUpdateTime', Date.now().toString());
       checkMilestone();
-      
-      // ⭐ প্রতি ১০ সেকেন্ড পর পর ক্লাউডে সিঙ্ক
-      if (seconds % 10 === 0) {
-        triggerCloudSync();
-      }
     }, 1000);
 
     updateDisplay();
   } else {
-    // ⭐ টাইমার বন্ধ ছিল, কিন্তু ক্লাউড থেকে হয়তো ডেটা এসেছে
-    seconds = savedSeconds; 
+    seconds = 0;
     updateDisplay();
   }
 })();
@@ -397,10 +372,6 @@ loadRandomAyat();
 // ============================================================
 window.AlorPoth = {
   getReports: () => JSON.parse(localStorage.getItem('reports') || '[]'),
-  clearAllReports: () => {
-    localStorage.removeItem('reports');
-    triggerCloudSync();
-  },
-  humanTime: humanTime,
-  syncToCloud: triggerCloudSync
+  clearAllReports: () => localStorage.removeItem('reports'),
+  humanTime: humanTime
 };
